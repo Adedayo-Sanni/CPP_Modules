@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phone_Book.hpp                                     :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:21:36 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/04 20:42:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/05 19:23:16 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
 #include <iostream>
 #include <string>
@@ -23,12 +26,17 @@ class Contact
 		std::string DarkestSecret;
 
 	public:
-		//delcarar os getters e setters 
+		void setFirstName(const std::string& firstName);
+		void setLastName(const std::string& lastName);
+		void setNickName(const std::string& nickeName);
+		void setPhoneNumber(const std::string& phoneNumber);
+		void setDarkestSecret(const std::string& darkestSecret);
+
+		std::string getFirstName() const;
+		std::string getLastName() const;
+		std::string getNickName() const;
+		std::string getPhoneNumber() const;
+		std::string getDarkestSecret() const;
 };
 
-class Phone_Book
-{
-	public:
-	Contact contact[8];
-	int num;
-};
+#endif
