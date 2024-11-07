@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:55:14 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/05 19:26:34 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/07 19:48:19 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class PhoneBook
 {
 	private:
 	Contact contact[8];
-	int num;
+	// int num;
 
 	public:
 	void addContact();

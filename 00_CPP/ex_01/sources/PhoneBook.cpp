@@ -6,14 +6,35 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:58:16 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/05 19:55:17 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/07 20:48:04 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PhoneBook.hpp"
 
 void PhoneBook::addContact(){
-	//colocar as informações do contato uma a uma
+	std::string firstname;
+	std::cout << "Enter the name" << std::endl;
+	std::getline(std::cin, firstname); 
+	this->contact->setFirstName(firstname);
+
+	std::string lastname;
+	std::cout << "Enter the lastname" << std::endl;
+	std::getline(std::cin, lastname); 
+	
+	std::string nickname;
+	std::cout << "Enter the nickname" << std::endl;
+	std::getline(std::cin, nickname); 
+
+	std::string phonenumber;
+	std::cout << "Enter the phonenumber" << std::endl;
+	std::getline(std::cin, phonenumber);
+	
+	std::string darkestsecret;
+	std::cout << "Enter the darkestsecret" << std::endl;
+	std::getline(std::cin, darkestsecret); 
+
+	std::cout << contact->getFirstName() << std::endl;
 	
 	//depois criar o contato
 }
@@ -25,5 +46,5 @@ void PhoneBook::searchContact(){
 	//se estiver errado ou ainda não existir-> msg de erro
 }
 void PhoneBook::exitPhone(){
-	//quita do programa
+	return ;
 }
