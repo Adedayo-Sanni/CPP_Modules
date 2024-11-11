@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:21:36 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/05 19:23:16 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/11 19:37:19 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include <limits>
+#include <cstdlib>
 
 class Contact
 {
