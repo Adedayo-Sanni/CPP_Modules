@@ -6,19 +6,32 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:58:16 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/11 19:43:42 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/16 14:31:31 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PhoneBook.hpp"
 
+PhoneBook::PhoneBook() : index(0) {} 
+
+std::string PhoneBook::getInfo(std::string prompt){
+	std::string info;
+	
+	std::cout << prompt << std::endl;
+	std::getline(std::cin, info);
+	while (info.empty()) {
+		std::cout << "Input cannot be empty. Type again." << std::endl;
+		std::getline(std::cin, info);
+	}
+	return(info);
+}
+
 void PhoneBook::addContact(){
-	PhoneBook::index = 0;
-	contact->setFirstName(getInfo("Enter the name:"));
-	contact->setLastName(getInfo("Enter the lastname:"));
-	contact->setNickName(getInfo("Enter the nickname"));
-	contact->setPhoneNumber(getInfo("Enter the phonenumber"));
-	contact->setDarkestSecret(getInfo("Enter the darkestsecret"));
+	contact[index].setFirstName(getInfo("Enter the name:"));
+	contact[index].setLastName(getInfo("Enter the lastname:"));
+	contact[index].setNickName(getInfo("Enter the nickname"));
+	contact[index].setPhoneNumber(getInfo("Enter the phonenumber"));
+	contact[index].setDarkestSecret(getInfo("Enter the darkestsecret"));
 
 	index = (index + 1) % 8;
 }
@@ -47,27 +60,25 @@ std::string formatColumn(const std::string& text, unsigned width) {
 }
 
 void PhoneBook::searchContact() {
-	int index = returnIndex();
 	
-	std::cout << std::setw(10) << (index + 1) << "|";
-	std::cout << std::setw(10) << formatColumn(contact[index].getFirstName(), 10) << "|";
-	std::cout << std::setw(10) << formatColumn(contact[index].getLastName(), 10) << "|";
-	std::cout << std::setw(10) << formatColumn(contact[index].getNickName(), 10) << "|" << std::endl;
+	for (int i = 0; i < index; i++){
+		std::cout << std::setw(10) << (i + 1) << "|";
+		std::cout << std::setw(10) << formatColumn(contact[i].getFirstName(), 10) << "|";
+		std::cout << std::setw(10) << formatColumn(contact[i].getLastName(), 10) << "|";
+		std::cout << std::setw(10) << formatColumn(contact[i].getNickName(), 10) << "|" << std::endl;
+		
+	}
+
+	int index = returnIndex();
+	std::cout << "Name:" << contact[index].getFirstName() << std::endl;
+	std::cout << "Lastname:" << contact[index].getLastName() << std::endl;
+	std::cout << "Nickname:" << contact[index].getNickName() << std::endl;
+	std::cout << "Phonenumber:" << contact[index].getPhoneNumber() << std::endl;
+	std::cout << "Darkest Secret:" << contact[index].getDarkestSecret() << "\n\n" << std::endl;
+	
 	
 }
 
 void PhoneBook::exitPhone(){
 	return ;
-}
-
-// setw example
-#include <iostream>     // std::cout, std::endl
-#include <iomanip>      // std::setw
-
-int meain () {
-  std::cout << std::setw(10);
-  std::cout << "oi";
-  std::cout << std::setw(10);
-  std::cout << "tchau" << std::endl;
-  return 0;
 }

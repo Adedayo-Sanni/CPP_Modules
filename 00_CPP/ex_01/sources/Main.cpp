@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:22:46 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/11 19:44:45 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/16 14:14:49 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int main(void)
 			phonebook.addContact();
 		}
 		else if (!input.compare("SEARCH")){
+			//exibir todos os contatos
 			phonebook.searchContact();
 		}
 		else if (!input.compare("EXIT")){
