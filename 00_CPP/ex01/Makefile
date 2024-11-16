@@ -5,19 +5,19 @@
 #                                                     +:+ +:+         +:+      #
 #    By: asanni <asanni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/02 15:19:34 by asanni            #+#    #+#              #
-#    Updated: 2024/11/04 16:21:39 by asanni           ###   ########.fr        #
+#    Created: 2024/11/02 16:20:40 by asanni            #+#    #+#              #
+#    Updated: 2024/11/16 16:57:33 by asanni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-NAME = megaphone
-
+NAME = phone_book
 CFLAGS = -Wall -Werror -Wextra
+COMPILE = c++ -std=c++98
 
-SOURCES = megaphone.cpp
 
-COMPILE = c++
+CPP = $(wildcard *.cpp)
+HPP = $(wildcard *.hpp)
 
 all:
-	$(COMPILE) $(SOURCES) $(CFLAGS) -o $(NAME)
+	$(COMPILE) $(CPP) $(CFLAGS) -o $(NAME)
+

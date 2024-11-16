@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 15:19:52 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/02 17:05:05 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/16 14:36:36 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,3 @@ int	main (int argc, char **argv)
 	}
 	return (0);
 }
-
-//A toupper retorna o int ascii então casto para char para imprimir
-//as letras no terminal
