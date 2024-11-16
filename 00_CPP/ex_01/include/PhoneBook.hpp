@@ -6,12 +6,12 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:55:14 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/16 16:09:38 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/16 16:11:30 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#pragma once
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
 #include "Contact.hpp"
 
@@ -34,4 +34,5 @@ class PhoneBook
 		void searchContact();
 		void exitPhone();
 };
-//pragma é uma intrição pro compilador 
+
+#endif
