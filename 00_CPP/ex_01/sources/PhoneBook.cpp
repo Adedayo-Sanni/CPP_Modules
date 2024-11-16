@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:58:16 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/16 14:31:31 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/16 15:57:12 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ void PhoneBook::addContact(){
 	index = (index + 1) % 8;
 }
 
-int returnIndex()
-{
-	std::string prompt;
+int returnIndex() {
+	std::string input;
 	int index;
-	while (true){
-		std::cout << "Type the desired contact" << std::endl;
-		std::cin >> index;
+
+	while (true) {
+		std::cout << "Type the desired contact (1-8):" << std::endl;
+		std::getline(std::cin, input);
 		
-		if (std::cin.fail() || index < 1 || index > 8){
-			std::cout << "Invalid input. Please enter a number between 1 and 8." << std::endl;
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits <std::streamsize>::max(), '\n');
+		
+		std::istringstream iss(input);
+		if (iss >> index && index >= 1 && index <= 8) {
+			return index - 1;
 		}
-		else
-			return (index - 1);
+		std::cout << "Invalid input. Please enter a number between 1 and 8." << std::endl;
 	}
 }
+
 std::string formatColumn(const std::string& text, unsigned width) {
 	if (text.length() > width)
 		return text.substr(0, width - 1) + "."; 
