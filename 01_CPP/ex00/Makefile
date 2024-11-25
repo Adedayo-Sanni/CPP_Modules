@@ -6,7 +6,7 @@
 #    By: asanni <asanni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/23 17:08:41 by asanni            #+#    #+#              #
-#    Updated: 2024/11/25 18:46:41 by asanni           ###   ########.fr        #
+#    Updated: 2024/11/25 18:56:47 by asanni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ COMPILE = c++ -std=c++98
 
 
 # CPP = $(wildcard *.cpp)
-CPP = Zombie.cpp main.cpp
+CPP = Zombie.cpp main.cpp randomChump.cpp
 HPP = $(wildcard *.hpp)
 
 all:

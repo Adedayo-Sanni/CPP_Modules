@@ -6,12 +6,13 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:37:44 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/25 18:37:49 by asanni           ###   ########.fr       */
+/*   Updated: 2024/11/25 20:22:30 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void Zombie::randomChump( std::string name ){
-	
+void randomChump(std::string name) {
+	Zombie z(name);
+	z.announce();
 }
