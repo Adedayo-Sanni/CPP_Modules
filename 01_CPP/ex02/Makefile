@@ -5,11 +5,10 @@
 #                                                     +:+ +:+         +:+      #
 #    By: asanni <asanni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/23 17:08:41 by asanni            #+#    #+#              #
-#    Updated: 2024/12/14 17:05:00 by asanni           ###   ########.fr        #
+#    Created: 2024/12/14 16:40:05 by asanni            #+#    #+#              #
+#    Updated: 2024/12/14 16:40:10 by asanni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = zombie
 CFLAGS = -Wall -Werror -Wextra
