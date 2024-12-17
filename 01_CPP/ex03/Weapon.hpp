@@ -6,19 +6,19 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:44:42 by asanni            #+#    #+#             */
-/*   Updated: 2024/12/17 20:26:59 by asanni           ###   ########.fr       */
+/*   Updated: 2024/12/17 20:32:43 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WEAPON_HPP
 # define WEAPON_HPP
 
-#include <iostcqe	q	eode  eam>
-wetwetwetwetwetwret
+#include <iostream>
+
 class Weapon
 {
 	private:
-		st	qeq	eq	qw::string type;
+		std::string type;
 	
 	public:
 		const std::string& getType() const;
