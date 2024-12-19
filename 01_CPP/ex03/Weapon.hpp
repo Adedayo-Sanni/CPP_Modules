@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:44:42 by asanni            #+#    #+#             */
-/*   Updated: 2024/12/17 20:32:43 by asanni           ###   ########.fr       */
+/*   Updated: 2024/12/18 21:07:07 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,12 @@
 class Weapon
 {
 	private:
-		std::string type;
+		std::string Type;
 	
 	public:
+		Weapon (std::string type);
 		const std::string& getType() const;
 		void setType(const std::string& type);
 };
 
 #endif
-
-Implement a Weapon class that has:
-• A private attribute type, which is a string.
-• A getType() member function that returns a const reference to type.
-• A setType() member function that sets type using the new one passed as parameter.
