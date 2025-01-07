@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:03:56 by asanni            #+#    #+#             */
-/*   Updated: 2025/01/06 20:21:14 by asanni           ###   ########.fr       */
+/*   Updated: 2025/01/07 19:00:06 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,23 @@ bool replace(const std::string& filename, const std::string& s1, const std::stri
 		std::cerr << "Error: Could not open file " << filename << std::endl;
 		return false;
 	}
-	
 	std::ofstream outputFile((filename + ".replace").c_str());
 	if (!outputFile.is_open()) {
 		std::cerr << "Error: Could not create " << filename << ".replace." << std::endl;
 		inputFile.close();
 		return false;
 	}
-	
-	return 0;
+	std::string line;
+	while (std::getline(inputFile, line)) {
+		size_t pos = 0;
+		while ((pos = line.find(s1, pos)) != std::string::npos) {
+			line.erase(pos, s1.length());
+			line.insert(pos, s2);
+			pos += s2.length();
+		}
+		outputFile << line << '\n';
+	}
+	return true;
 }
 
 int main(int argc, char *argv[]) {
@@ -47,11 +55,8 @@ int main(int argc, char *argv[]) {
 	std::string filename = argv[1];
 	std::string s1 = argv[2];
 	std::string s2 = argv[3];
-
-	if (!replace(filename, s1, s2)) {
+	if (!replace(filename, s1, s2))
 		return 1;
-	}
-	
-	std::cout << "Substituições concluídas com sucesso!" << std::endl;
+	std::cout << "Program ended sucessfully" << std::endl;
 	return 0;
 }
