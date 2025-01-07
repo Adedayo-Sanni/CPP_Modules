@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:45:57 by asanni            #+#    #+#             */
-/*   Updated: 2024/12/18 21:12:26 by asanni           ###   ########.fr       */
+/*   Updated: 2025/01/06 18:38:52 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ HumanA::~HumanA(){
 	std::cout << Name << " is being destroyed!" << std::endl;
 }
 
-void HumanA::Attack(){
+void HumanA::attack(){
 	std::cout<< Name << " attacks with their " << Arma.getType() <<std::endl;
 }

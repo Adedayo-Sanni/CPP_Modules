@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 15:22:58 by asanni            #+#    #+#             */
-/*   Updated: 2024/12/14 15:32:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/12/18 20:35:23 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Zombie
 		std::string Name;
 	
 	public:
-		Zombie() : Name("") {}
+		Zombie(void);
 		Zombie(std::string zombieName);
 		void announce(void);
 		~Zombie(void);

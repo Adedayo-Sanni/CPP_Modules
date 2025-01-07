@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:02:46 by asanni            #+#    #+#             */
-/*   Updated: 2025/01/06 18:48:09 by asanni           ###   ########.fr       */
+/*   Created: 2025/01/07 19:02:49 by asanni            #+#    #+#             */
+/*   Updated: 2025/01/07 19:14:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
 
-int main()
+#ifndef HARL
+# define HARL
+
+class Harl
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
+	private:
+	void debug( void );
+	void info( void );
+	void warning( void );
+	void error( void );
 	
-	{
-		Weapon gun = Weapon("Machine Gun");
-		HumanB jim("Jim");
-		jim.setWeapon(gun);
-		jim.attack();
-		gun.setType("some other type of gun");
-		jim.attack();
-	}
-	return 0;
-}
+	public:
+	void complain( std::string level);
+};
+
+#endif

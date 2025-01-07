@@ -6,11 +6,13 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:16:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/12/14 15:32:57 by asanni           ###   ########.fr       */
+/*   Updated: 2025/01/06 19:26:29 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+
+Zombie::Zombie(void) : Name("") {}
 
 Zombie::Zombie(std::string zombieName) : Name(zombieName) {}
 

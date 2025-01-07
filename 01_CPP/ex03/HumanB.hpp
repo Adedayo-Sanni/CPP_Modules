@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 18:19:47 by asanni            #+#    #+#             */
+/*   Updated: 2025/01/06 18:42:40 by asanni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef HUMANB_HPP
 # define HUMANB_HPP
 
@@ -13,20 +25,8 @@ class HumanB
 	public:
 	HumanB(std::string name);
 	~HumanB();
-	void Attack();
+	void attack();
+	void setWeapon(Weapon &weapon);
 };
 
 #endif
-
-
- // criar função para setar a arma do human
- // na função attack se ele tiver arma inprime a msg 
- // caso não tenha a arma ele vai imprimir que não tem arma
-
-
-// They also have a member function attack() that displays (of course, without the
-// angle brackets):
-// <name> attacks with their <weapon type>
-
-// HumanB doesnt takes the Weapon in its constructor
-// HumanB may not always have a Weapon.

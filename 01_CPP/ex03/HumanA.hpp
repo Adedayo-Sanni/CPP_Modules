@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:52:35 by asanni            #+#    #+#             */
-/*   Updated: 2024/12/18 21:14:53 by asanni           ###   ########.fr       */
+/*   Updated: 2025/01/06 18:42:38 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@ class HumanA
 	public:
 	HumanA(std::string name, Weapon &arma);
 	~HumanA();
-	void Attack();
+	void attack();
 };
 
 #endif
-
-
-// They also have a member function attack() that displays
-// <name> attacks with their <weapon type>
-// HumanA takes the Weapon in its constructor and will always be armed.
