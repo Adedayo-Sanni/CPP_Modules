@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:31:13 by asanni            #+#    #+#             */
-/*   Updated: 2025/03/23 17:58:13 by asanni           ###   ########.fr       */
+/*   Updated: 2025/03/27 17:21:04 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ ScavTrap(const std::string& name): ClapTrap(name) {
 	std::cout << "ScavTrap destructor called"<< std::endl;
 }
 
-void ScavTrap::attack(const std::string& target) override{
+void ScavTrap::attack(const std::string& target) {
 if (EnergyPoints > 0 && HitPoints > 0) {
 	EnergyPoints--; // Attacking consumes 1 energy point
 	std::cout << "ScavTrap " << name << " attacks " << target << ", causing " 
