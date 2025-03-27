@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 17:33:19 by asanni            #+#    #+#             */
-/*   Updated: 2025/03/23 17:57:39 by asanni           ###   ########.fr       */
+/*   Updated: 2025/03/27 20:13:31 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 #include "ScavTrap.hpp"
 
 int main() {
-	ScavTrap scavTrap1("Scaver");
+	ClapTrap myScav = ScavTrap("Scav3");
+
+
+
+	myScav.attack("Target etc");
+	ScavTrap scavTrap1("Scaver1");
 	scavTrap1.attack("Target1");
 	scavTrap1.guardGate();
-	ScavTrap scavTrap2("Scavvy2");
+	ScavTrap scavTrap2("Scaver2");
 	scavTrap2.attack("Target2");
 	scavTrap2.guardGate();
 	return 0;

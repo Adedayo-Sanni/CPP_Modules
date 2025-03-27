@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 13:07:31 by asanni            #+#    #+#             */
-/*   Updated: 2025/03/27 19:31:14 by asanni           ###   ########.fr       */
+/*   Updated: 2025/03/27 19:41:29 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class ClapTrap{
 	public:
 	ClapTrap(const std::string& name);
 	ClapTrap(ClapTrap const &obj);
-	ClapTrap& operator=(ClapTrap const obj);
+	ClapTrap& operator=(ClapTrap const &obj);
 	~ClapTrap();
 	
 	void attack(const std::string& target);
