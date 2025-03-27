@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 13:08:12 by asanni            #+#    #+#             */
-/*   Updated: 2025/03/23 16:21:21 by asanni           ###   ########.fr       */
+/*   Updated: 2025/03/27 17:15:56 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ ClapTrap::~ClapTrap() {
 
 void ClapTrap::attack(const std::string& target){
 	if (EnergyPoints > 0 && HitPoints > 0) {
-		EnergyPoints--; // Attacking consumes 1 energy point
+		EnergyPoints--;
 		std::cout << "ClapTrap " << name << " attacks " << target << ", causing " 
 				  << AttackDamage << " points of damage!" << std::endl;
 	} else {
@@ -38,7 +38,7 @@ void ClapTrap::takeDamage(unsigned int amount){
 	if (HitPoints > 0) {
 		HitPoints -= amount;
 		if (HitPoints < 0) {
-			HitPoints = 0; // Hit points shouldn't be negative
+			HitPoints = 0;
 		}
 		std::cout << "ClapTrap " << name << " takes " << amount << " points of damage!" << std::endl;
 	} else {
@@ -48,7 +48,7 @@ void ClapTrap::takeDamage(unsigned int amount){
 
 void ClapTrap::beRepaired(unsigned int amount){
 	if (EnergyPoints > 0) {
-		EnergyPoints--; // Repairing consumes 1 energy point
+		EnergyPoints--;
 		HitPoints += amount;
 		std::cout << "ClapTrap " << name << " is repaired by " << amount 
 				  << " points! Now has " << HitPoints << " hit points." << std::endl;
