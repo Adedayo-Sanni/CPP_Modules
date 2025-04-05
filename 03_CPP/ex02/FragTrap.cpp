@@ -6,13 +6,20 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:20:58 by asanni            #+#    #+#             */
-/*   Updated: 2025/04/05 15:41:48 by asanni           ###   ########.fr       */
+/*   Updated: 2025/04/05 18:38:58 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap(const std::string& name) : ClapTrap(name) {
+	hitPoints = 100;
+	energyPoints = 100;
+	attackDamage = 30;
+	std::cout << "FragTrap " << name << " has been created! Let's get this party started!" << std::endl;
+}
+
+FragTrap::FragTrap() : ClapTrap(name) {
 	hitPoints = 100;
 	energyPoints = 100;
 	attackDamage = 30;

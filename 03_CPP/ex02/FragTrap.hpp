@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:21:02 by asanni            #+#    #+#             */
-/*   Updated: 2025/04/05 15:47:04 by asanni           ###   ########.fr       */
+/*   Updated: 2025/04/05 18:40:26 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 
 class FragTrap : public ClapTrap {
 	public:
-		FragTrap(const std::string& name);
-		FragTrap(const FragTrap& obj);
-		FragTrap& operator=(const FragTrap& obj);
-		~FragTrap();
+	FragTrap();
+	FragTrap(const std::string& name);
+	FragTrap(const FragTrap& obj);
+	FragTrap& operator=(const FragTrap& obj);
+	~FragTrap();
 
-		void attack(const std::string& target);
-		void highFivesGuys();
+	void attack(const std::string& target);
+	void highFivesGuys();
 };
 
 #endif
