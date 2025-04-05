@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:31:17 by asanni            #+#    #+#             */
-/*   Updated: 2025/03/27 20:15:01 by asanni           ###   ########.fr       */
+/*   Updated: 2025/04/05 15:46:53 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 class ScavTrap : public ClapTrap {
 	public:
-	ScavTrap(const std::string& name);
-	ScavTrap(const ScavTrap& obj);
-	ScavTrap& operator=(const ScavTrap& obj);
-	virtual ~ScavTrap();
+		ScavTrap(const std::string& name);
+		ScavTrap(const ScavTrap& obj);
+		ScavTrap& operator=(const ScavTrap& obj);
+		~ScavTrap();
 
-	void attack(const std::string& target);
-	void guardGate();
+		void attack(const std::string& target);
+		void guardGate();
 };
 
 #endif
