@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:53:41 by asanni            #+#    #+#             */
-/*   Updated: 2025/04/05 20:14:44 by asanni           ###   ########.fr       */
+/*   Updated: 2025/04/12 17:39:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ class Cat : public Animal{
 	~Cat();
 
 	void makeSound() const;
-	//std::string getType() const;
 };
 
 #endif

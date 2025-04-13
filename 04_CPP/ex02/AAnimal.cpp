@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
+/*   AAnimal.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:19:03 by asanni            #+#    #+#             */
-/*   Updated: 2025/04/12 16:51:10 by asanni           ###   ########.fr       */
+/*   Updated: 2025/04/13 19:23:34 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongAnimal.hpp"
+#include "AAnimal.hpp"
 
-WrongAnimal::WrongAnimal(){
+AAnimal::AAnimal(){
 	std::cout << "Animal " << "has been created!" << std::endl;
 	this->type = "Animal";
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &obj){
+AAnimal::AAnimal(const AAnimal &obj){
 	std::cout << "Animal " << "has been copied!" << std::endl;
 	this->type = obj.type;
 }
 
-WrongAnimal& WrongAnimal::operator=(WrongAnimal const &obj){
+AAnimal& AAnimal::operator=(AAnimal const &obj){
 	std::cout << "Animal " << "assing operator called" << std::endl;
 	this->type = obj.type;
 	return(*this);
 }
 
-WrongAnimal::~WrongAnimal(){
+AAnimal::~AAnimal(){
 	std::cout << "Animal " << "has been destructed" << std::endl;
 }
 
-void WrongAnimal::makeSound() const{
+void AAnimal::makeSound() const{
 	std::cout << "Generic animal sound" << std::endl;
 }
 
-std::string WrongAnimal::getType() const{
+std::string AAnimal::getType() const{
 	return this->type;
 }

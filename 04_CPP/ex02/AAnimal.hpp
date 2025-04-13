@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:18:58 by asanni            #+#    #+#             */
-/*   Updated: 2025/04/13 19:44:24 by asanni           ###   ########.fr       */
+/*   Updated: 2025/04/13 19:27:43 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef AANIMAL_HPP
+#define AANIMAL_HPP
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -23,17 +23,17 @@
 
 #include <iostream>
 
-class Animal{
+class AAnimal{
 	protected:
 	std::string type;
 
 	public:
-	Animal();
-	Animal(const Animal &obj);
-	Animal& operator=(Animal const &obj);
-	virtual ~Animal();
+	AAnimal();
+	AAnimal(const AAnimal &obj);
+	AAnimal& operator=(AAnimal const &obj);
+	virtual ~AAnimal();
 	
-	virtual void makeSound() const;
+	virtual void makeSound() const = 0;
 	std::string getType() const;
 };
 

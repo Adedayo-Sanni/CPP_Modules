@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 19:12:44 by asanni            #+#    #+#             */
-/*   Updated: 2025/04/13 19:46:28 by asanni           ###   ########.fr       */
+/*   Updated: 2025/04/12 16:51:24 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-Cat::Cat() : Animal(){
+WrongCat::WrongCat() : WrongAnimal(){
 	std::cout << "Cat " << "has been created!" << std::endl;
 	this->type = "Cat";
 }
 
-Cat::Cat(const Cat &obj) : Animal(){
+WrongCat::WrongCat(const WrongCat &obj) : WrongAnimal(){
 	std::cout << "Cat " << "has been copied!" << std::endl;
 	this->type = obj.type;
 }
 
-Cat& Cat::operator=(const Cat &obj){
+WrongCat& WrongCat::operator=(const WrongCat &obj){
 	std::cout << "Cat " << "assing operator called" << std::endl;
 	this->type = obj.type;
 	return(*this);
 }
 
-Cat::~Cat(){
+WrongCat::~WrongCat(){
 	std::cout << "Cat " << "has been destructed" << std::endl;
 }
 
-void Cat::makeSound() const{
-	std::cout << GREEN << "Miau!!!" << RESET << std::endl;
+void WrongCat::makeSound() const{
+	std::cout << "Miau!!!" << std::endl;
 }
+

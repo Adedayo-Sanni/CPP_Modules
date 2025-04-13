@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:19:03 by asanni            #+#    #+#             */
-/*   Updated: 2025/04/05 19:59:27 by asanni           ###   ########.fr       */
+/*   Updated: 2025/04/13 19:48:09 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Animal::~Animal(){
 }
 
 void Animal::makeSound() const{
-	std::cout << "Generic animal sound" << std::endl;
+	std::cout <<YELLOW << "Generic animal sound" << RESET << std::endl;
 }
 
 std::string Animal::getType() const{

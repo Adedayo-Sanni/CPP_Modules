@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/05 18:18:58 by asanni            #+#    #+#             */
-/*   Updated: 2025/04/13 19:44:24 by asanni           ###   ########.fr       */
+/*   Created: 2025/04/12 17:03:44 by asanni            #+#    #+#             */
+/*   Updated: 2025/04/13 16:20:24 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
-
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define BLUE    "\033[34m"
-#define MAGENTA "\033[35m"
-#define CYAN    "\033[36m"
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
 #include <iostream>
 
-class Animal{
-	protected:
-	std::string type;
+class Brain{
+	private:
+	std::string ideas[100];
 
 	public:
-	Animal();
-	Animal(const Animal &obj);
-	Animal& operator=(Animal const &obj);
-	virtual ~Animal();
-	
-	virtual void makeSound() const;
-	std::string getType() const;
+	Brain();
+	Brain(const Brain &obj);
+	Brain& operator=(Brain const &obj);
+	virtual ~Brain();
+
+	std::string getIdea( int i);
+	void setIdea(std::string thought, int i);
 };
 
 #endif
-
-
