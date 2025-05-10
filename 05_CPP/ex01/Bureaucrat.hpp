@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 13:42:49 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 11:49:35 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/10 12:38:52 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ class Bureaucrat {
 		int getGrade() const;
 		void incrementGrade();
 		void decrementGrade();
+		void signForm();
 
 		class GradeTooHighException : public std::exception {
 			public:

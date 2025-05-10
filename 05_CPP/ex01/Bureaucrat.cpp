@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:07:00 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 12:34:51 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/10 12:39:16 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,3 +69,5 @@ const char* Bureaucrat::GradeTooHighException::what() const throw() {
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
 	return "Grade too low!";
 }
+
+void Bureaucrat::signForm(){}

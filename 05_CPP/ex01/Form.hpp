@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 13:42:49 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 11:49:35 by asanni           ###   ########.fr       */
+/*   Created: 2025/05/08 16:51:55 by asanni            #+#    #+#             */
+/*   Updated: 2025/05/10 12:42:49 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,34 @@
 #include <stdexcept>
 #include <exception>
 
-class Bureaucrat {
+class Bureaucrat
+
+class Form {
+	
 	private:
-		const std::string name;
-		int grade;
+	const std::string name;
+	bool isSigned;
+	const int gradeToSign;
+	const int gradeToExecute;
 
 	public:
-		Bureaucrat();
-		Bureaucrat(const std::string name, int grade);
-		Bureaucrat(const Bureaucrat &other);
-		Bureaucrat& operator=(const Bureaucrat &other);
-		~Bureaucrat();
+	Form();
+	Form(const std::string name, const int gradeToSign, const int gradeToExecute);
+	Form(const Form &other);
+	Form &operator=(const Form &other);
+	~Form();
+	void beSigned(Bureaucrat& bureaucrat);
 
-		const std::string getName() const;
-		int getGrade() const;
-		void incrementGrade();
-		void decrementGrade();
+	class GradeTooHighException : public std::exception {
+		public:
+			const char* what() const throw();
+	};
 
-		class GradeTooHighException : public std::exception {
-			public:
-				const char* what() const throw();
-		};
+	class GradeTooLowException : public std::exception {
+		public:
+			const char* what() const throw();
+	};
+}
 
-		class GradeTooLowException : public std::exception {
-			public:
-				const char* what() const throw();
-		};
-};
-
-std::ostream & operator<<(std::ostream &os, const Bureaucrat &obj);
 
 #endif
-

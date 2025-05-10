@@ -6,11 +6,11 @@
 #    By: asanni <asanni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/15 14:14:46 by asanni            #+#    #+#              #
-#    Updated: 2025/04/13 19:18:25 by asanni           ###   ########.fr        #
+#    Updated: 2025/05/08 16:02:02 by asanni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex02
+NAME = ex00
 CFLAGS = -Wall -Werror -Wextra
 COMPILE = c++ -std=c++98
 
