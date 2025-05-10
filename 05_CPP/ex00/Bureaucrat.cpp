@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:07:00 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 16:53:03 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/10 18:04:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ Bureaucrat::Bureaucrat () : name("bureaucrat") , grade(50){
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name) {
 	if (grade < 1)
-		throw GradeTooHighException();
+		throw (GradeTooHighException());
 	else if (grade > 150)
-		throw GradeTooLowException();
+		throw (GradeTooLowException());
 	this->grade = grade;
 }
 
