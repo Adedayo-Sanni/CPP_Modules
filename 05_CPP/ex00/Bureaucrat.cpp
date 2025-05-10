@@ -6,14 +6,14 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:07:00 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 12:34:51 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/10 16:53:03 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 
-Bureaucrat::Bureaucrat () : name("bureaucrat") , grade(72){
+Bureaucrat::Bureaucrat () : name("bureaucrat") , grade(50){
 }
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name) {

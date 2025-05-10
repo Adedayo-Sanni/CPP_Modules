@@ -6,12 +6,12 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:51:55 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 16:42:36 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/10 17:40:31 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 //Colors
 #define RESET   "\033[0m"
@@ -29,7 +29,7 @@
 
 class Bureaucrat;
 
-class Form {
+class AForm {
 	
 	private:
 	const std::string name;
@@ -38,11 +38,11 @@ class Form {
 	const int gradeToExecute;
 
 	public:
-	Form();
-	Form(const std::string name, const int gradeToSign, const int gradeToExecute);
-	Form(const Form &other);
-	Form &operator=(const Form &other);
-	~Form();
+	AForm();
+	AForm(const std::string name, const int gradeToSign, const int gradeToExecute);
+	AForm(const AForm &other);
+	AForm &operator=(const AForm &other);
+	virtual ~AForm();
 
 	//Getters
 	const std::string &getName() const;
@@ -50,10 +50,10 @@ class Form {
 	int getGradeToSign() const;
 	int getGradeToExecute() const;
 
-	//methods
-	void beSigned(Bureaucrat& bureaucrat);
+	//Methods
+	virtual void beSigned(Bureaucrat& bureaucrat) = 0;
 
-	//exceptions
+	//Exceptions
 	class GradeTooHighException : public std::exception {
 		public:
 			const char* what() const throw();
@@ -65,6 +65,6 @@ class Form {
 	};
 };
 
-std::ostream& operator<<(std::ostream &out, const Form &form);
+std::ostream& operator<<(std::ostream &out, const AForm &form);
 
 #endif
