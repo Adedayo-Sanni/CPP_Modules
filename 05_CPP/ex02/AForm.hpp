@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:51:55 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 17:40:31 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/13 18:29:29 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,14 @@ class AForm {
 	int getGradeToSign() const;
 	int getGradeToExecute() const;
 
+	//Setters
+	void setIsSigned(bool isSigned);
+	void setGradeToSign(int gradeToSign);
+	void setGradeToExecute(int gradeToExecute);
+	
 	//Methods
 	virtual void beSigned(Bureaucrat& bureaucrat) = 0;
+	virtual void execute(Bureaucrat const & executor) const = 0;
 
 	//Exceptions
 	class GradeTooHighException : public std::exception {

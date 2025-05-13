@@ -6,12 +6,12 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:21:36 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 18:28:57 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/13 18:22:09 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
 //Colors
 #define RESET   "\033[0m"
@@ -28,16 +28,18 @@
 #include "AForm.hpp"
 
 
+class AForm;
 
 class ShrubberyCreationForm : public AForm {
-	private:
-	
 	
 	public:
-	ShrubberyCreationForm()
-	ShrubberyCreationForm() // passar as grades
-	ShrubberyCreationForm& operator=(ShrubberyCreationForm const &obj)
-	~ShrubberyCreationForm()
+		ShrubberyCreationForm();
+		ShrubberyCreationForm(ShrubberyCreationForm& other);
+		ShrubberyCreationForm& operator=(ShrubberyCreationForm const &obj);
+		~ShrubberyCreationForm();
+
+		//Methods
+		void execute(Bureaucrat const & executor) const;
 };
 
 #endif

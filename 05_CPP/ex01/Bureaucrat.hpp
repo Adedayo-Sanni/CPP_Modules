@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 13:42:49 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 16:46:31 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/13 17:46:58 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 #include <iostream>
 #include <stdexcept>
 #include <exception>
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 	private:

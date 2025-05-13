@@ -6,12 +6,12 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:42:10 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 16:42:13 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/13 17:47:05 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 int main() {
 	try {
