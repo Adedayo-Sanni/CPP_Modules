@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:21:36 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/13 18:22:09 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/13 19:41:53 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@
 class AForm;
 
 class ShrubberyCreationForm : public AForm {
-	
-	public:
+	private:
+		std::string target;
 		ShrubberyCreationForm();
+		
+	public:
+		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(ShrubberyCreationForm& other);
 		ShrubberyCreationForm& operator=(ShrubberyCreationForm const &obj);
 		~ShrubberyCreationForm();

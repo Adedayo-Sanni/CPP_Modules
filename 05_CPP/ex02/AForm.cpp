@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 12:03:21 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/13 18:30:30 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/13 18:55:11 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,6 @@ int AForm::getGradeToSign() const {
 
 int AForm::getGradeToExecute() const {
 	return gradeToExecute;
-}
-
-//Setters
-void AForm::setIsSigned(bool isSigned) {
-	this->isSigned = isSigned;
-}
-
-void AForm::setGradeToSign(int gradeToSign) {
-	this->gradeToSign = gradeToSign;
-}
-
-void AForm::setGradeToExecute(int gradeToExecute) {
-	this->gradeToExecute = gradeToExecute;
 }
 
 //Methods
