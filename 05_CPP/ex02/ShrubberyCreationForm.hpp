@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:21:36 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/13 19:41:53 by asanni           ###   ########.fr       */
+/*   Updated: 2025/05/21 18:56:55 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #define CYAN    "\033[36m"
 
 #include <iostream>
+#include <fstream>
 #include <stdexcept>
 #include <exception>
 #include "AForm.hpp"
