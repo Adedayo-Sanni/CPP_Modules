@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 16:02:42 by asanni            #+#    #+#             */
-/*   Updated: 2025/06/07 18:02:46 by asanni           ###   ########.fr       */
+/*   Updated: 2025/06/07 18:09:26 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor) const{
 		throw GradeTooLowException();//mudar o retorno
 	if (executor.getGrade() > this->getGradeToExecute())
 		throw GradeTooLowException();
-	std::cout << "Makes some drilling noises\n.\n.\n." << RobotomyRequestForm.getName << "has been robotomized\n" <<std::endl;
+	std::cout << "Makes some drilling noises\n.\n.\n." << this->getName() << "has been robotomized\n" <<std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:07:20 by asanni            #+#    #+#             */
-/*   Updated: 2025/06/07 16:01:56 by asanni           ###   ########.fr       */
+/*   Updated: 2025/06/07 18:09:56 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,5 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
 		file << "       | |       \n";
 		file << "      /   \\      \n";
 		file.close();
-		return false;
 }
 }

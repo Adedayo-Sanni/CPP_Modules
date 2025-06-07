@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:48:41 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/13 18:16:20 by asanni           ###   ########.fr       */
+/*   Updated: 2025/06/07 18:19:54 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,13 @@ class AForm;
 
 class PresidentialPardonForm : public AForm {
 	
+	private:
+	std::string target;
+	PresidentialPardonForm();
+	
 	public:
-		PresidentialPardonForm();
-		PresidentialPardonForm(AForm& form);
+		PresidentialPardonForm(std::string target);
+		PresidentialPardonForm(PresidentialPardonForm& form);
 		PresidentialPardonForm& operator=(PresidentialPardonForm const &obj);
 		~PresidentialPardonForm();
 
