@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:07:20 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/21 19:00:09 by asanni           ###   ########.fr       */
+/*   Updated: 2025/06/07 16:01:56 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
 	if(!file.is_open()){
 		std::cout<< "Error: Could not create form " << target << "_shrubbery" << std::endl;
 		return;
-		// Escreve árvores em ASCII
 		file << "       _-_        \n";
 		file << "    /~~   ~~\\     \n";
 		file << " /~~         ~~\\ \n";
