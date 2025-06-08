@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 13:42:49 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/13 18:46:52 by asanni           ###   ########.fr       */
+/*   Updated: 2025/06/08 16:53:39 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ class Bureaucrat {
 		Bureaucrat& operator=(const Bureaucrat &other);
 		~Bureaucrat();
 
+		//Methods
 		const std::string getName() const;
 		int getGrade() const;
 		void incrementGrade();
 		void decrementGrade();
 		void signForm(AForm &form);
+		void executeForm(AForm const & form) const;
 		
 		class GradeTooHighException : public std::exception {
 			public:
@@ -59,6 +61,7 @@ class Bureaucrat {
 };
 
 std::ostream & operator<<(std::ostream &os, const Bureaucrat &obj);
+
 
 #endif
 

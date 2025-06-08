@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:48:45 by asanni            #+#    #+#             */
-/*   Updated: 2025/06/07 18:01:29 by asanni           ###   ########.fr       */
+/*   Updated: 2025/06/08 17:58:56 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <exception>
+#include <cstdlib>
+#include <ctime>
 #include "AForm.hpp"
 
 
