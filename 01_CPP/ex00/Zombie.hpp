@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 15:22:58 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/27 17:57:16 by asanni           ###   ########.fr       */
+/*   Updated: 2025/01/09 17:48:32 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ class Zombie
 		std::string Name;
 	
 	public:
+		Zombie();
+		~Zombie();
 		Zombie(std::string zombieName);
 		void announce(void);
-		~Zombie(void);
 };
 
 void randomChump(std::string name);

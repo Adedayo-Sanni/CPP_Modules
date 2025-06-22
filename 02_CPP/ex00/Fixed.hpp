@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/16 12:39:23 by asanni            #+#    #+#             */
-/*   Updated: 2025/03/16 12:39:26 by asanni           ###   ########.fr       */
+/*   Created: 2025/03/15 12:15:51 by asanni            #+#    #+#             */
+/*   Updated: 2025/03/16 12:33:22 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 # define Fixed_HPP
 
 #include <iostream>
-#include <cmath>
-
 
 class Fixed{
 	private:
-		int fixedPoint;
+		int num;
 		static const int fractionalBits = 8;
 
 	public:
-		Fixed();
-		Fixed(Fixed const &object);
-		Fixed(const int nbr);
-		Fixed(const float nbr);
-		Fixed& operator=(Fixed const &object);
+		Fixed(); //construtor padrão
+		Fixed(Fixed const &object);// copia o construtor e recebe como parametro um objeto da própria classe
+		Fixed& operator=(Fixed const &object);// *
 		~Fixed();
 		int getRawBits() const;
 		void setRawBits( int const raw );
-		float toFloat( void ) const;
-		int toInt( void ) const;
 };
-std::ostream & operator<<(std::ostream &os, const Fixed &obj);
+
+/*Um operador de atribuição por cópia é uma função membro não estática
+com o nome operator=, que pode ser chamado com um argumento do mesmo tipo de classe 
+e copia o conteúdo do argumento sem modificar o argumento.*/
 
 #endif

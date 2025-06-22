@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 15:22:58 by asanni            #+#    #+#             */
-/*   Updated: 2025/01/09 17:58:03 by asanni           ###   ########.fr       */
+/*   Created: 2025/06/22 14:27:45 by asanni            #+#    #+#             */
+/*   Updated: 2025/06/22 16:27:28 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-# define CONTACT_HPP
+#ifndef FRAGTRAP_HPP
+#define FRAGTRAP_HPP
 
-#include <iostream>
+#include "ClapTrap.hpp"
 
-class Zombie
-{
+class FragTrap: public ClapTrap{
 	private:
-		std::string Name;
-	
+		FragTrap();
 	public:
-		Zombie();
-		~Zombie();
-		Zombie(std::string zombieName);
-		void announce(void);
-		void setName(std::string zombieName);
+		FragTrap(std::string name);
+		FragTrap(const FragTrap &other);
+		FragTrap& operator=(const FragTrap &other);
+		~FragTrap();
+		void highFivesGuys(void);
 };
-Zombie* zombieHorde(int N, std::string name);
-void randomChump(std::string name);
-Zombie* newZombie(std::string name);
+
 
 #endif

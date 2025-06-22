@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 15:22:58 by asanni            #+#    #+#             */
-/*   Updated: 2025/01/09 17:58:03 by asanni           ###   ########.fr       */
+/*   Created: 2025/06/22 15:30:03 by asanni            #+#    #+#             */
+/*   Updated: 2025/06/22 16:39:18 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-# define CONTACT_HPP
+#include "DiamondTrap"
 
-#include <iostream>
+DiamondTrap::DiamondTrap(){}
 
-class Zombie
-{
-	private:
-		std::string Name;
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap("_clap_"){
 	
-	public:
-		Zombie();
-		~Zombie();
-		Zombie(std::string zombieName);
-		void announce(void);
-		void setName(std::string zombieName);
-};
-Zombie* zombieHorde(int N, std::string name);
-void randomChump(std::string name);
-Zombie* newZombie(std::string name);
+}
 
-#endif
+DiamondTrap::DiamondTrap(const DiamondTrap &other){
+	
+}
+
+DiamondTrap& DiamondTrap::operator=(const DiamondTrap &other){
+	
+}
+
+DiamondTrap::~DiamondTrap(){
+	
+}
+
+void DiamondTrap::whoAmI(){
+	
+}

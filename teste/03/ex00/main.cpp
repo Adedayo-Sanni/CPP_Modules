@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 15:22:58 by asanni            #+#    #+#             */
-/*   Updated: 2025/01/09 17:58:03 by asanni           ###   ########.fr       */
+/*   Created: 2025/06/19 15:12:11 by asanni            #+#    #+#             */
+/*   Updated: 2025/06/22 16:17:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-# define CONTACT_HPP
+#include "ClapTrap.hpp"
 
-#include <iostream>
-
-class Zombie
+int main(void)
 {
-	private:
-		std::string Name;
+	std::string name = "Socorro";
+	ClapTrap A(name);
+	ClapTrap B("Filó");
 	
-	public:
-		Zombie();
-		~Zombie();
-		Zombie(std::string zombieName);
-		void announce(void);
-		void setName(std::string zombieName);
-};
-Zombie* zombieHorde(int N, std::string name);
-void randomChump(std::string name);
-Zombie* newZombie(std::string name);
-
-#endif
+	A.attack("Filó");
+	B.takeDamage(1);
+	B.attack("Socorro");
+	B.beRepaired(1);
+}

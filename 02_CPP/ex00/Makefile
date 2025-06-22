@@ -6,7 +6,7 @@
 #    By: asanni <asanni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/15 14:14:46 by asanni            #+#    #+#              #
-#    Updated: 2025/04/05 19:53:43 by asanni           ###   ########.fr        #
+#    Updated: 2025/03/15 18:08:55 by asanni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,22 +14,9 @@ NAME = ex00
 CFLAGS = -Wall -Werror -Wextra
 COMPILE = c++ -std=c++98
 
+
 CPP = $(wildcard *.cpp)
-OBJ = $(CPP:.cpp=.o)
+HPP = $(wildcard *.hpp)
 
-
-all: $(NAME)
-
-%.o : %.cpp 
-	$(COMPILE) $(CFLAGS) -c $< -o $@
-
-$(NAME): $(OBJ)
-	@$(COMPILE) $(OBJ) $(CFLAGS) -o $(NAME)
-
-clean:
-	rm -f $(OBJ)
-
-fclean: clean
-	rm -f $(NAME)
-
-re: fclean all
+all:
+	$(COMPILE) $(CPP) $(CFLAGS) -o $(NAME)

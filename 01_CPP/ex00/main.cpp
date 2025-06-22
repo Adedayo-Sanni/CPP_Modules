@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:33:00 by asanni            #+#    #+#             */
-/*   Updated: 2024/11/27 18:01:56 by asanni           ###   ########.fr       */
+/*   Updated: 2025/01/09 17:58:52 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int main() {
 	randomChump("Troy");
 	randomChump("Sharpay");
-	Zombie* gabriella = newZombie("Gabriella");
-	gabriella->announce();
-	delete gabriella;
-	Zombie* Chad = newZombie("Chad");
-	Chad->announce();
-	delete Chad;
+	Zombie* Gabriella = newZombie("Gabriella");
+	Gabriella->announce();
+	delete Gabriella;
+	Zombie* nameless = new Zombie;
+	nameless->announce();
+	delete nameless;
 	return 0;
 }
