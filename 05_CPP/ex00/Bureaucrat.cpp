@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:07:00 by asanni            #+#    #+#             */
-/*   Updated: 2025/05/10 18:04:08 by asanni           ###   ########.fr       */
+/*   Updated: 2025/09/06 13:55:40 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void Bureaucrat::decrementGrade() {
 }
 
 std::ostream & operator<<(std::ostream &os, const Bureaucrat &obj ){
-	os << obj.getName() << " bureaucrat grade" << obj.getGrade();
+	os << obj.getName() << " bureaucrat [grade: " << obj.getGrade() << "]";
 	return os;
 }
 
