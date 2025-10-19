@@ -1,0 +1,82 @@
++------------------------+
+|        Data obj        |
+|------------------------|
+| name: "Adedayo"        |
+| age: 25                |
+| score: 99.5            |
++------------------------+
+       ^
+       | &data (Data*)
+       |
+       v
++------------------------+
+|  Ponteiro em memória   |
+| Valor: 0x7ffd24b06c40 |   <- endereço real do objeto
++------------------------+
+       |
+       | reinterpret_cast<uintptr_t>
+       v
++------------------------+
+|    Inteiro uintptr_t   |
+| Valor: 140724897601600 |   <- representação numérica do endereço
++------------------------+
+       |
+       | reinterpret_cast<Data*>
+       v
++------------------------+
+|    Ponteiro Data*      |
+| Valor: 0x7ffd24b06c40 |   <- mesmo endereço que original
++------------------------+
+       |
+       v
++------------------------+
+|    Acesso aos dados    |
+| name: "Adedayo"        |
+| age: 25                |
+| score: 99.5            |
++------------------------+
+
+
+
+reinterpret_cast
++----------------------+
+|     Objeto Data      |
+|----------------------|
+| name: "Adedayo"      |
+| age: 25              |
+| score: 99.5          |
++----------------------+
+       ^
+       | &data (Data*)  ---> ponteiro aponta para o objeto
+       |
+       v
++----------------------+
+|  Ponteiro Data*      |
+| Valor: 0x7ffd24b06c40 |
+| Bits (64-bit):       |
+| 01111111 11011101 ... |
++----------------------+
+       |
+       | reinterpret_cast<uintptr_t>
+       v
++----------------------+
+| Integer uintptr_t    |
+| Valor: 140724897601600 |
+| Bits: 01111111 11011101 ...  <- MESMOS bits, só interpretados como inteiro
++----------------------+
+       |
+       | reinterpret_cast<Data*>
+       v
++----------------------+
+| Ponteiro Data*       |
+| Valor: 0x7ffd24b06c40 |
+| Bits: 01111111 11011101 ... <- MESMOS bits novamente, agora interpretados como ponteiro
++----------------------+
+       |
+       v
++----------------------+
+| Acesso ao objeto     |
+| name: "Adedayo"      |
+| age: 25              |
+| score: 99.5          |
++----------------------+

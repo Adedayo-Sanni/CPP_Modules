@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 18:58:47 by asanni            #+#    #+#             */
-/*   Updated: 2025/10/19 19:28:15 by asanni           ###   ########.fr       */
+/*   Updated: 2025/10/19 19:59:21 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ ScalarConverter::ScalarConverter(const ScalarConverter &) {}
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &) { return *this; }
 ScalarConverter::~ScalarConverter() {}
 
+//Methods
 bool ScalarConverter::isCharLiteral(const std::string &literal) {
     return (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'');
 }
