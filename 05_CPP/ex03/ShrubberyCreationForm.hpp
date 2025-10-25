@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/13 19:01:32 by asanni            #+#    #+#             */
-/*   Updated: 2025/09/13 19:27:52 by asanni           ###   ########.fr       */
+/*   Created: 2025/05/10 18:21:36 by asanni            #+#    #+#             */
+/*   Updated: 2025/06/08 16:46:20 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-#define SCALARCONVERTER_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
+//Colors
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -22,18 +23,26 @@
 #define CYAN    "\033[36m"
 
 #include <iostream>
+#include <fstream>
+#include <stdexcept>
+#include <exception>
+#include "AForm.hpp"
 
-class ScalarConverter
-{
+class AForm;
+
+class ShrubberyCreationForm : public AForm {
 	private:
-	ScalarConverter();
-	ScalarConverter(const ScalarConverter &other);
-	ScalarConverter& operator=(ScalarConverte &other);
-	~ScalarConverter();
-	
+		std::string target;
+		ShrubberyCreationForm();
+		
 	public:
-	//method
-	static void convert(std::string cpp_literal);
+		ShrubberyCreationForm(std::string target);
+		ShrubberyCreationForm(ShrubberyCreationForm& other);
+		ShrubberyCreationForm& operator=(ShrubberyCreationForm const &obj);
+		~ShrubberyCreationForm();
+
+		//Methods
+		void execute(Bureaucrat const & executor) const;
 };
 
 #endif
