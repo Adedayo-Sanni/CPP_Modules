@@ -1,0 +1,5 @@
+# Ignorar arquivos objeto de compilação
+*.o
+
+# Ignorar arquivos de texto
+*.txt
