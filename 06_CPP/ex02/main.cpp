@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:51:08 by asanni            #+#    #+#             */
-/*   Updated: 2025/10/20 21:09:44 by asanni           ###   ########.fr       */
+/*   Updated: 2025/10/25 17:19:07 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,33 @@ void identify(Base* p) {
 }
 
 void identify(Base& p) {
-    Base* ptr = &p; // ✅ apenas pegando o endereço da referência, não um novo ponteiro
-    if (dynamic_cast<A*>(ptr))
-        std::cout << "Identified (reference): A" << std::endl;
-    else if (dynamic_cast<B*>(ptr))
-        std::cout << "Identified (reference): B" << std::endl;
-    else if (dynamic_cast<C*>(ptr))
-        std::cout << "Identified (reference): C" << std::endl;
-    else
-        std::cout << "Unknown type" << std::endl;
+	try {
+		(void)dynamic_cast<A&>(p);
+		std::cout << "Identified (reference): A" << std::endl;
+		return;
+	} catch (...) {}
+
+	try {
+		(void)dynamic_cast<B&>(p);
+		std::cout << "Identified (reference): B" << std::endl;
+		return;
+	} catch (...) {}
+
+	try {
+		(void)dynamic_cast<C&>(p);
+		std::cout << "Identified (reference): C" << std::endl;
+		return;
+	} catch (...) {}
+
+	std::cout << "Unknown type" << std::endl;
 }
 
 int main() {
-    Base* base = generate();
+	Base* base = generate();
 
-    identify(base);
-    identify(*base);
+	identify(base);
+	identify(*base);
 
-    delete base;
-    return 0;
+	delete base;
+	return 0;
 }
