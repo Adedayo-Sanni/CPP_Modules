@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asanni <asanni@student.42sp.org.br>        +#+  +:+       +#+         #
+#    By: asanni <asanni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/15 14:14:46 by asanni            #+#    #+#              #
-#    Updated: 2025/10/19 18:30:50 by asanni           ###   ########.fr        #
+#    Updated: 2025/10/30 22:37:19 by asanni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ex00
 CFLAGS = -Wall -Werror -Wextra
 COMPILE = c++ -std=c++98
 
-CPP = $(wildcard *.cpp)
+CPP = main.cpp
 OBJ = $(CPP:.cpp=.o)
 
 
