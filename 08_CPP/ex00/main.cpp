@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 20:13:14 by asanni            #+#    #+#             */
-/*   Updated: 2025/10/29 20:36:14 by asanni           ###   ########.fr       */
+/*   Updated: 2025/10/29 20:56:25 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main()
 {
     try
     {
-        std::cout << "=== Testing easyfind with std::vector ===" << std::endl;
+        std::cout << GREEN << "=== Testing easyfind with std::vector ===" << RESET << std::endl;
         std::vector<int> vec;
         vec.push_back(10);
         vec.push_back(20);
@@ -31,19 +31,19 @@ int main()
         std::cout << "Value found: " << *itVec << std::endl;
 
         std::cout << "Searching for 99 in vector..." << std::endl;
-        itVec = easyfind(vec, 99); // This should throw
-        std::cout << "Value found: " << *itVec << std::endl; // won't run
+        itVec = easyfind(vec, 99); 
+        std::cout << "Value found: " << *itVec << std::endl; 
     }
     catch (const std::exception& e)
     {
-        std::cerr << "Vector test error: " << e.what() << std::endl;
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
 
     std::cout << std::endl;
 
     try
     {
-        std::cout << "=== Testing easyfind with std::list ===" << std::endl;
+        std::cout << GREEN << "=== Testing easyfind with std::list ===" << RESET << std::endl;
         std::list<int> lst;
         lst.push_back(5);
         lst.push_back(15);
