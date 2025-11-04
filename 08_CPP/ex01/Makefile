@@ -6,25 +6,24 @@
 #    By: asanni <asanni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/15 14:14:46 by asanni            #+#    #+#              #
-#    Updated: 2025/10/30 22:43:10 by asanni           ###   ########.fr        #
+#    Updated: 2025/11/04 19:10:16 by asanni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ex01
-CFLAGS = -Wall -Werror -Wextra
-COMPILE = c++ -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-CPP = main.cpp
-OBJ = $(CPP:.cpp=.o)
-
+SRC = main.cpp Span.cpp
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-%.o : %.cpp 
-	$(COMPILE) $(CFLAGS) -c $< -o $@
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	@$(COMPILE) $(OBJ) $(CFLAGS) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)
