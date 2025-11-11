@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 20:38:03 by asanni            #+#    #+#             */
-/*   Updated: 2025/10/29 20:48:32 by asanni           ###   ########.fr       */
+/*   Updated: 2025/11/01 18:04:24 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ public:
 	void addNumber(int number);
 	unsigned int shortestSpan(void) const;
 	unsigned int longestSpan(void) const;
-  
-//templates can be declared on hpp
+
 template <typename InputIterator>
 void addNumber(InputIterator begin, InputIterator end)
 {

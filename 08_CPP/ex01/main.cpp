@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 20:45:33 by asanni            #+#    #+#             */
-/*   Updated: 2025/10/29 20:47:59 by asanni           ###   ########.fr       */
+/*   Updated: 2025/11/04 19:15:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,20 @@ int main()
 	}
 }
 
- //main subject
+
+
+//main subject
 
  
-/*int main()
-{
-Span sp = Span(5);
-sp.addNumber(6);
-sp.addNumber(3);
-sp.addNumber(17);
-sp.addNumber(9);
-sp.addNumber(11);
-std::cout << sp.shortestSpan() << std::endl;
-std::cout << sp.longestSpan() << std::endl;
-return 0;
-}*/
+// int main()
+// {
+// Span sp = Span(5);
+// sp.addNumber(6);
+// sp.addNumber(3);
+// sp.addNumber(17);
+// sp.addNumber(9);
+// sp.addNumber(11);
+// std::cout << sp.shortestSpan() << std::endl;
+// std::cout << sp.longestSpan() << std::endl;
+// return 0;
+// }
