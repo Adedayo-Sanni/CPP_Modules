@@ -12,7 +12,7 @@ class set{
   set operator=(const set &other);
   ~set();
 
-  set(const searchable_bag &other);
+  set(searchable_bag &other);
 
   //methods
 

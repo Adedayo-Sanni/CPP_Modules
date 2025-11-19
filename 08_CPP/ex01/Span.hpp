@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 20:38:03 by asanni            #+#    #+#             */
-/*   Updated: 2025/11/01 18:04:24 by asanni           ###   ########.fr       */
+/*   Updated: 2025/11/04 20:07:02 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void addNumber(InputIterator begin, InputIterator end)
 		throw std::runtime_error("Not possible to add: over the limit");
 	_numbers.insert(_numbers.end(), begin, end);
 }
-  
+
 };
 
 #endif
