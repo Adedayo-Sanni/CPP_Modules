@@ -117,37 +117,110 @@ bool bigint::operator!=(const bigint& other) const{
 }
 
 
-
-bigint& bigint::operator>>=(const bigint& other){
-
+bigint& bigint::operator<<=(int i) {
+    if (i <= 0) return *this;
+    this->num.append(i, '0');
+    return *this;
 }
 
-bigint& bigint::operator<<=(const bigint& other){
+bigint& bigint::operator>>=(int i) {
+    if (i <= 0) return *this;
+    if (i >= this->num.size()) {
+        this->num = "0";
+    } else {
+        this->num.erase(this->num.size() - i, i);
+    }
+    return *this;
+}
 
+////////////////////////////////////////////////////
+
+bigint& bigint::operator<<=(const bigint& other) {
+    size_t shift = 0;
+
+    for (std::string::size_type i = 0; i < other.num.size(); ++i) {
+        char c = other.num[i];
+        shift = shift * 10 + (c - '0');
+    }
+
+    this->num.append(shift, '0');
+    return *this;
 }
 
 
-bigint& bigint::operator>>=(int i){
 
+bigint& bigint::operator>>=(const bigint& other) {
+    size_t shift = 0;
+
+    for (std::string::size_type i = 0; i < other.num.size(); ++i) {
+        char c = other.num[i];
+        shift = shift * 10 + (c - '0');
+    }
+
+    if (shift >= this->num.size()) {
+        this->num = "0";
+    } else {
+        this->num.erase(this->num.size() - shift);
+    }
+    return *this;
 }
 
-bigint& bigint::operator<<=(int i){
 
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+bigint bigint::operator<<(int i) {
+    bigint tmp(*this);
+    tmp <<= i;
+    return tmp;
+}
+
+bigint bigint::operator>>(int i) {
+    bigint tmp(*this);
+    tmp >>= i;
+    return tmp;
 }
 
 
 
-bigint& bigint::operator++(){
-
+bigint& bigint::operator++() {
+    *this = *this + bigint("1");
+    return *this;
 }
 
-bigint& bigint::operator++(int){
-
+bigint& bigint::operator++(int) {
+    bigint tmp(*this);
+    *this = *this + bigint("1");
+    return tmp;
 }
-
 
 
 std::ostream& operator<<(std::ostream& os, const bigint& var){
-  os << 
-  return os;
+    std::string s = var.num;
+
+    // Remove zeros à esquerda
+    std::string::size_type i = 0;
+    while (i < s.size() - 1 && s[i] == '0')
+        ++i;
+
+    os << s.substr(i);
+    return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const bigint& var) {
+    std::string s = var.num;
+
+    // Remove zeros à esquerda
+    std::string::size_type pos = s.find_first_not_of('0');
+    if (pos == std::string::npos)
+        s = "0";
+    else
+        s = s.substr(pos);
+
+    os << s;
+    return os;
 }
