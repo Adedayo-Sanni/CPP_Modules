@@ -24,11 +24,14 @@ class bigint{
   bool operator==(const bigint& other) const;
   bool operator!=(const bigint& other) const;
 
+  bigint& operator>>=(int i);
+  bigint& operator<<=(int i);
   bigint& operator>>=(const bigint& other);
   bigint& operator<<=(const bigint& other);
 
-  bigint& operator>>=(int i);
-  bigint& operator<<=(int i);
+
+  bigint operator<<(int i);
+  bigint operator>>(int i);
 
 
   bigint& operator++();
