@@ -13,7 +13,7 @@ searchable_tree_bag& searchable_tree_bag::operator=(const searchable_tree_bag &o
 
 searchable_tree_bag::~searchable_tree_bag(){}
 
-bool has(int val){
+bool has(int val) const{
   bool find = false;
   node *n =this->tree;
 
