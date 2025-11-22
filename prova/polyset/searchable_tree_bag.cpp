@@ -1,17 +1,17 @@
 #include "searchable_tree_bag.hpp"
 
 
-searchable_tree_bag(void){}
+searchable_tree_bag::searchable_tree_bag(void){}
 
-searchable_tree_bag(const searchable_tree_bag &other):tree_bag(other){}
+searchable_tree_bag::searchable_tree_bag(const searchable_tree_bag &other):tree_bag(other){}
 
-searchable_tree_bag operator=(const searchable_tree_bag &other){
-  if(this != other)
-    tree_bag::opertor=(other);
-  return(this);
+searchable_tree_bag& searchable_tree_bag::operator=(const searchable_tree_bag &other){
+  if(this->tree_bag != other.tree_bag)
+    tree_bag::operator=(other);
+  return (*this);
 }
 
-~searchable_tree_bag(){}
+searchable_tree_bag::~searchable_tree_bag(){}
 
 bool has(int val){
   bool find = false;
