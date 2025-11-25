@@ -173,7 +173,20 @@ void start_game(int height,int width, int it)
 	}
 }
 
-
+void free_cmds(char* str)
+{
+	if (str != NULL)
+		free(str);
+}
+void free_matrix(int height)
+{
+	for (int i = 0; i < height; i ++)
+		free(g_matriz[i]);
+	free(g_matriz);
+	for (int i = 0; i < height; i ++)
+		free(g_temp[i]);
+	free(g_temp);
+}
 
 int main (int argc, char **argv){
 	if (argc != 4)
@@ -187,90 +200,10 @@ int main (int argc, char **argv){
 	create_matrix(game.height, game.width);
 	comands = read_cmds();
 	draw_matrix(comands, game.height, game.width);
-	// dar o free no cmds aqui
+	free_cmds(comands);
 	start_game(game.height, game.width, game.it);
 	print_matrix(game.height, game.width);
-	free_matrix()
+	free_matrix(game.height);
 
 	return 0;
 }
-
-
-void free_matrix()
-{
-	//dar free na matrix e na temp globais;
-}
-/*
-          $
- 0   000  $
- 0     0  $
- 000  0   $
-  0  000  $
-          $
-
-      0   $
-      00  $
-00   0 0  $
- 0 0 0    $
- 000 000  $
-      0   $
-
-
-      00  $
- 0   0 0  $
-000 00 0  $
-   0 0 0  $
- 0 0 0 0  $
-  0  000  $
-
-      00  $
-000 00 00 $
-0000 0 00 $
-0  0 0 00 $
-   0 0 00 $
-  0 00 0  $
-
- 0   0000 $
-0   00    $
-     0   0$
-0  0 0   0$
- 000 0    $
-   000 00 $
-
-
-    0000 $
- 0 000    $
-00 0 0   0$
- 0 0 0   0$
-  00 0    $
-   000 00 $
-
-      00  $
- 0  00 00 $
- 000 0 00 $
-0  0 0 00 $
-   0 0 00 $
-  0 00 0  $
-
-      00  $
-     0 0  $
-000 00 0  $
-   0 0 0  $
- 0 0 0 0  $
-  0  000  $
-
-      0   $
-      00  $
-00   0 0  $
- 0 0 0    $
- 000 000  $
-      0   $
-
-          $
- 0   000  $
- 0     0  $
- 000  0   $
-  0  000  $
-          $
-
-*/
