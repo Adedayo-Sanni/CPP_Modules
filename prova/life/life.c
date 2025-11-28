@@ -203,7 +203,11 @@ int main (int argc, char **argv){
 	free_cmds(comands);
 	start_game(game.height, game.width, game.it);
 	print_matrix(game.height, game.width);
+<<<<<<< Updated upstream
 	free_matrix(game.height);
+=======
+	free_matrix();
+>>>>>>> Stashed changes
 
-	return 0;
+	return(0);
 }

@@ -154,7 +154,6 @@ std::ostream& operator<<(std::ostream& os, const vect2& var){
   return os;
 }
 
-
 vect2 operator*(int i, const vect2& var) {
    return var * i;
 }

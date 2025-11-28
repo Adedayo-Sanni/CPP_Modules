@@ -107,7 +107,6 @@ bool bigint::operator!=(const bigint& other) const {
 }
 
 bigint& bigint::operator<<=(int i) {
-    // reaproveitar lógica já existente
     this->num.append(i, '0');
     return *this;
 }
