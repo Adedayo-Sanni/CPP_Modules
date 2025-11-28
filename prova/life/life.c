@@ -13,7 +13,7 @@ int ft_strlen(char* str)
 	}
 	return (i);
 }
-void fill_temp_with_spaces(int height, int width);
+
 void fill_with_spaces(int height, int width)
 {
 	for(int i = 0; i < height; i++)
@@ -110,14 +110,6 @@ void print_matrix(int height, int width)
 		putchar('\n');
 	}
 }
-
-/**
- 
--1,-1	|-1,0	|	-1,1
-0,-1	|0,0	|	0,1
-1,-1	|1,0	|1,1
-
-*/
 
 int count_neighbors(int height,int width, int i , int j)
 {
