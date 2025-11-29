@@ -1,205 +1,215 @@
 #include "life.h"
 
-char** g_matriz;
-char** g_temp;
+char **g_matriz;
+char **g_temp;
 
-int ft_strlen(char* str)
+void fill_spaces(int linha, int coluna)
 {
-	int i = 0;
-	if (str != NULL)
+	for (int i = 0; i < linha; i++)
 	{
-		while (str[i] != '\0')
-			i++;
+		for (int j = 0; j < coluna; j++)
+			g_matriz[i][j] = ' ';
+		g_matriz[i][coluna] = '\0';
 	}
-	return (i);
-}
 
-void fill_with_spaces(int height, int width)
-{
-	for(int i = 0; i < height; i++)
+	for (int i = 0; i < linha; i++)
 	{
-		for(int j = 0; j < width; j++)
-			g_matriz[i][j] = 32;
-	}
-	for(int i = 0; i < height; i++)
-	{
-		for(int j = 0; j < width; j++)
-			g_temp[i][j] = 32;
+		for (int j = 0; j < coluna; j++)
+			g_temp[i][j] = ' ';
+		g_temp[i][coluna] = '\0';
 	}
 }
 
-void fill_temp_with_spaces(int height, int width)
+void create_matrix(int linha, int coluna)
 {
-	for(int i = 0; i < height; i++)
+	g_matriz = calloc(linha, sizeof(char *));
+	for (int i = 0; i < linha; i++)
+		g_matriz[i] = calloc(coluna + 1, sizeof(char));
+
+	g_temp   = calloc(linha, sizeof(char *));
+	for (int i = 0; i < linha; i++)
+		g_temp[i] = calloc(coluna + 1, sizeof(char));
+
+	fill_spaces(linha, coluna);
+}
+
+// char *read_cmds()
+// {
+// 	char *cmds = malloc(1);
+// 	cmds[0] = '\0';
+
+// 	char buf[50];
+// 	long last_pos = 0;
+
+// 	int r = read(0, buf, 50);
+// 	while (r > 0)
+// 	{
+// 		cmds = realloc(cmds, last_pos + r + 1);
+// 		for (int i = 0; i < r; i++)
+// 			cmds[last_pos++] = buf[i];
+// 		cmds[last_pos] = '\0';
+
+// 		r = read(0, buf, 50);
+// 	}
+
+// 	if (last_pos > 0 && cmds[last_pos - 1] == '\n')
+// 		cmds[last_pos - 1] = '\0';
+
+// 	return cmds;
+// }
+
+char *read_cmds()
+{
+	char *cmds = malloc(1);
+	int size = 1;
+	int len = 0;
+
+	cmds[0] = '\0';
+
+	char c;
+	int read_char = read(0, &c, 1);
+
+	while (read_char > 0)
 	{
-		for(int j = 0; j < width; j++)
-			g_temp[i][j] = 32;
+		if (c == '\n')
+			break;
+		cmds = realloc(cmds, size + 1);
+		cmds[len] = c;
+		len++;
+		size++;
+
+		cmds[len] = '\0';
+
+		read_char = read(0, &c, 1);
 	}
+
+	return cmds;
 }
 
-void create_matrix(int height, int width)
-{
-	g_matriz = calloc(height + 1, sizeof(char*));
-	int i = 0;
-	for(int i = 0; i < height; i++)
-		g_matriz[i] = calloc( width + 1, sizeof(char));
-	g_temp = calloc(height + 1, sizeof(char*));
-	 i = 0;
-	for(i= 0; i < height; i++)
-		g_temp[i] = calloc( width + 1, sizeof(char));
-	fill_with_spaces(height, width);
-}
 
-char* read_cmds()
-{
-	char* comands;
-	long last_position = 0;
-	char temp[50];
-	int int_read = read(0, temp, 50);
-	comands = malloc(int_read);
-	while (int_read > 0)
-	{
-		comands = realloc(comands, ft_strlen(comands) + int_read + 1);
-		int i = 0;
-		while (i < int_read)
-		{
-			comands[last_position] = temp[i];
-			last_position++;
-			i++;
-		}
-		int_read = read(0, temp, 50);
-		comands[last_position] = '\0';
-	}
-	if (comands[last_position - 1] == '\n')
-		comands[last_position - 1] = '\0';
-	return (comands);
-}
-
-void draw_matrix(char *str, int height, int width)
+void draw_matrix(char *s, int h, int w)
 {
 	int line = 0;
 	int col = 0;
-	bool draw = false;
+	int draw = false;
 
-	while(*str)
+	while (*s)
 	{
-		if(*str == 'w' && line != 0)
+		if (*s == 'w' && line > 0)
 			line--;
-		if(*str == 'a' && col != 0)
+		else if (*s == 'a' && col > 0)
 			col--;
-		if(*str == 's' && line != height - 1)
+		else if (*s == 's' && line < h - 1)
 			line++;
-		if(*str == 'd' && col != width -1)
+		else if (*s == 'd' && col < w - 1)
 			col++;
-		if(*str == 'x')
+		else if (*s == 'x') 
 			draw = !draw;
 		if (draw)
 			g_matriz[line][col] = '0';
-		str++;
+
+		s++;
 	}
 }
 
-void print_matrix(int height, int width)
+void print_matrix(int linha, int coluna)
 {
-	for(int i = 0; i<height; i++)
+	for (int i = 0; i < linha; i++)
 	{
-		for (int j = 0; j< width; j++)
-		{
+		for (int j = 0; j < coluna; j++)
 			putchar(g_matriz[i][j]);
-		}
 		putchar('\n');
 	}
 }
 
-int count_neighbors(int height,int width, int i , int j)
+int count_neighbors(int linha, int coluna, int i, int j)
 {
-	int neighbors = 0;
-	if (i-1 >= 0 && j-1 >= 0 && g_matriz[i -1][j -1] == '0')
-		neighbors++;
-	if (i - 1>= 0 && g_matriz[i -1][j] == '0')
-		neighbors++;
-	if (i -1 >= 0 && j + 1 < width && g_matriz[i -1][j +1] == '0')
-		neighbors++;
-	if (j-1 >= 0 && g_matriz[i][j -1] == '0')
-		neighbors++;
-	if (j+1 < width && g_matriz[i][j+ 1] == '0')
-		neighbors++;
-	if (i+1 < height && j-1 >= 0 && g_matriz[i+1][j-1] == '0')
-		neighbors++;
-	if (i+1 < height && g_matriz[i+1][j] == '0')
-		neighbors++;
-	if (i+1 < height && j+1 < width && g_matriz[i+1][j+1] == '0')
-		neighbors++;
-	return (neighbors);
+	int vizinho = 0;
+
+	if (i - 1 >= 0 && g_matriz[i - 1][j] == '0')
+		vizinho++;
+	if (i + 1 < linha && g_matriz[i + 1][j] == '0')
+		vizinho++;
+	if (j - 1 >= 0 && g_matriz[i][j - 1] == '0')
+		vizinho++;
+	if (j + 1 < coluna && g_matriz[i][j + 1] == '0')
+		vizinho++;
+	if (i - 1 >= 0 && j - 1 >= 0 && g_matriz[i - 1][j - 1] == '0')
+		vizinho++;
+	if (i - 1 >= 0 && j + 1 < coluna && g_matriz[i - 1][j + 1] == '0')
+		vizinho++;
+	if (i + 1 < linha && j - 1 >= 0 && g_matriz[i + 1][j - 1] == '0')
+		vizinho++;
+	if (i + 1 < linha && j + 1 < coluna && g_matriz[i + 1][j + 1] == '0')
+		vizinho++;
+
+	return vizinho;
 }
 
-void start_game(int height,int width, int it)
+
+void start_game(int linha, int coluna, int it)
 {
-	while(it > 0)
+	while (it > 0)
 	{
-		for(int i = 0; i < height ; i++)
+		for (int i = 0; i < linha; i++)
+			for (int j = 0; j <coluna; j++)
+				g_temp[i][j] = ' ';
+
+		for (int i = 0; i < linha; i++)
 		{
-			for (int j = 0; j < width ; j++)
+			for (int j = 0; j <coluna; j++)
 			{
-				int neighbors = count_neighbors(height,width, i , j);
+				int n = count_neighbors(linha,coluna, i, j);
+
 				if (g_matriz[i][j] == '0')
 				{
-					if (neighbors == 2 || neighbors == 3)
+					if (n == 2 || n == 3)
 						g_temp[i][j] = '0';
-					else
-						g_temp[i][j] = ' ';
 				}
 				else
 				{
-					if (neighbors == 3)
+					if (n == 3)
 						g_temp[i][j] = '0';
-					else
-						g_temp[i][j] = ' ';
 				}
 			}
 		}
-		char** aux = g_matriz;
+		char **aux = g_matriz;
 		g_matriz = g_temp;
 		g_temp = aux;
+
 		it--;
 	}
 }
 
-void free_cmds(char* str)
+void free_matrix(int h)
 {
-	if (str != NULL)
-		free(str);
-}
-void free_matrix(int height)
-{
-	for (int i = 0; i < height; i ++)
+	for (int i = 0; i < h; i++)
 		free(g_matriz[i]);
 	free(g_matriz);
-	for (int i = 0; i < height; i ++)
+
+	for (int i = 0; i < h; i++)
 		free(g_temp[i]);
 	free(g_temp);
 }
 
-int main (int argc, char **argv){
+int main(int argc, char **argv)
+{
 	if (argc != 4)
-		return (putchar('X'));
-	struct game_init game;
-	game.width = atoi(argv[1]);
-	game.height = atoi(argv[2]);
-	game.it = atoi(argv[3]);
-	char* comands;
+		return putchar('X');
 
-	create_matrix(game.height, game.width);
-	comands = read_cmds();
-	draw_matrix(comands, game.height, game.width);
-	free_cmds(comands);
-	start_game(game.height, game.width, game.it);
-	print_matrix(game.height, game.width);
-<<<<<<< Updated upstream
-	free_matrix(game.height);
-=======
-	free_matrix();
->>>>>>> Stashed changes
+	int linha = atoi(argv[2]);
+	int coluna = atoi(argv[1]);
+	int it = atoi(argv[3]);
 
-	return(0);
+	create_matrix(linha, coluna);
+
+	char *cmds = read_cmds();
+	draw_matrix(cmds, linha, coluna);
+	free(cmds);
+
+	start_game(linha, coluna, it);
+	print_matrix(linha, coluna);
+
+	free_matrix(linha);
+	return 0;
 }
