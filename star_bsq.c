@@ -1,148 +1,291 @@
-#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
+/* ************************************************************************** */
+/*                            Funções utilitárias                              */
+/* ************************************************************************** */
 
-char g_empty;
-char g_obstacle;
-char g_full;
-char **g_map;
-int g_rows;
-int g_colum;
+void print_error()
+{
+    write(2, "map error\n", 10);
+}
+
+int ft_strlen(char *s)
+{
+    int i = 0;
+    while (s[i])
+        i++;
+    return i;
+}
 
 int min3(int a, int b, int c)
 {
-	int m = a;
-	if (b < m) m = b;
-	if (c < m) m = c;
-	return m;
+    int m = a;
+    if (b < m) m = b;
+    if (c < m) m = c;
+    return m;
 }
 
-void read_header(FILE *file)
+/* ************************************************************************** */
+/*                          Alocação e liberação                               */
+/* ************************************************************************** */
+
+char **alloc_map(int rows, int cols)
 {
-	if (fscanf(file, "%d %c %c %c\n", &g_rows, &g_empty, &g_obstacle, &g_full) != 4)
-	{
-		fprintf(stderr, "map error\n");
-		exit(1);
-	}
-	if (g_empty == g_obstacle || g_empty == g_full || g_obstacle == g_full)
-	{
-		fprintf(stderr, "map error\n");
-		exit(1);
-	}
+    char **m = malloc(sizeof(char*) * rows);
+    if (!m)
+        return 0;
+
+    for (int i = 0; i < rows; i++)
+    {
+        m[i] = malloc(cols + 1);
+        if (!m[i])
+            return 0;
+        m[i][cols] = '\0';
+    }
+    return m;
 }
 
-void read_map(FILE *file)
+void free_map(char **map, int rows)
 {
-	char *line = NULL;
-	size_t buf_size = 0;
-	ssize_t len;
-
-	g_map = calloc(g_rows, sizeof(char*));
-
-	for (int i = 0; i < g_rows; i++)
-	{
-		len = getline(&line, &buf_size, file);
-		if (len <= 0)
-		{
-			fprintf(stderr, "map error\n");
-			exit(1);
-		}
-
-		if (line[len - 1] == '\n')
-		{
-			line[len - 1] = '\0';
-			len--;
-		}
-		if (i == 0)
-			g_colum = (int)len;
-		else if (len != g_colum)
-		{
-			fprintf(stderr, "map error\n");
-			exit(1);
-		}
-		g_map[i] = malloc(len + 1);
-
-		for (int j = 0; j < len; j++)
-		{
-			if (line[j] != g_empty && line[j] != g_obstacle)
-			{
-				fprintf(stderr, "map error\n");
-				exit(1);
-			}
-			g_map[i][j] = line[j];
-		}
-		g_map[i][len] = '\0';
-	}
-
-	free(line);
+    for (int i = 0; i < rows; i++)
+        free(map[i]);
+    free(map);
 }
 
-void print_map(int maxrow, int maxsize, int maxcol);
+/* ************************************************************************** */
+/*                             Leitura de arquivo                              */
+/* ************************************************************************** */
 
-void find_fill_square()
+int read_file(char *path, char **buffer)
 {
-	int maxsize = 0;
-	int maxrow = 0;
-	int maxcol = 0;
+    int fd = open(path, O_RDONLY);
+    if (fd < 0)
+        return 0;
 
-	//aloca matriz dp;
-	int **dp = calloc(g_rows, sizeof(int*));
-	for (int i = 0; i < g_rows; i++)
-		dp[i] = calloc(g_colum, sizeof(int));
-	for (int i = 0; i < g_rows; i++)
-	{
-		for (int j = 0; j < g_colum; j++)
-		{
-			if (g_map[i][j] == g_obstacle)
-				dp[i][j] = 0;
-			else if (i == 0 || j == 0)
-				dp[i][j] = 1;
-			else
-				dp[i][j] = min3(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1;
+    char *buf = malloc(2000000);
+    int r = read(fd, buf, 2000000);
+    close(fd);
 
-			if (dp[i][j] > maxsize ||
-				(dp[i][j] == maxsize && (i < maxrow || (i == maxrow && j < maxcol))))
-			{
-				maxsize = dp[i][j];
-				maxrow = i;
-				maxcol = j;
-			}
-		}
-	}
-	print_map(maxrow, maxsize, maxcol);
+    if (r <= 0)
+    {
+        free(buf);
+        return 0;
+    }
+
+    buf[r] = '\0';
+    *buffer = buf;
+    return r;
 }
 
-void print_map(int maxrow, int maxsize, int maxcol)
+int read_stdin(char **buffer)
 {
-	for (int i = maxrow; i > maxrow - maxsize; i--)
-		for (int j = maxcol; j > maxcol - maxsize; j--)
-			g_map[i][j] = g_full;
+    char *buf = malloc(2000000);
+    int r = read(0, buf, 2000000);
 
-	for (int i = 0; i < g_rows; i++)
-		printf("%s\n", g_map[i]);
+    if (r <= 0)
+    {
+        free(buf);
+        return 0;
+    }
+
+    buf[r] = '\0';
+    *buffer = buf;
+    return r;
 }
+
+/* ************************************************************************** */
+/*                               Parsing do mapa                               */
+/* ************************************************************************** */
+
+int parse_header(char *buf, int *rows, char *empty, char *obst, char *full)
+{
+    int i = 0;
+    int num = 0;
+
+    while (buf[i] >= '0' && buf[i] <= '9')
+    {
+        num = num * 10 + (buf[i] - '0');
+        i++;
+    }
+
+    if (num <= 0)
+        return -1;
+
+    *rows = num;
+    *empty = buf[i++];
+    *obst  = buf[i++];
+    *full  = buf[i++];
+
+    if (buf[i] != '\n')
+        return -1;
+
+    return i + 1; // retorna posição após header
+}
+
+int parse_map(char *buf, int start, char **map,
+              int rows, int cols, char empty, char obst)
+{
+    int i = start;
+    int r = 0;
+
+    while (r < rows)
+    {
+        for (int c = 0; c < cols; c++)
+        {
+            if (buf[i] != empty && buf[i] != obst)
+                return -1;
+
+            map[r][c] = buf[i];
+            i++;
+        }
+        if (buf[i] != '\n')
+            return -1;
+        i++;
+        r++;
+    }
+    return i;
+}
+
+/* ************************************************************************** */
+/*                               Algoritmo BSQ                                 */
+/* ************************************************************************** */
+
+void solve_bsq(char **map, int rows, int cols,
+               char full, char obst)
+{
+    int **dp = malloc(sizeof(int*) * rows);
+    for (int i = 0; i < rows; i++)
+        dp[i] = calloc(cols, sizeof(int));
+
+    int max = 0, mr = 0, mc = 0;
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            if (map[i][j] == obst)
+                dp[i][j] = 0;
+            else if (i == 0 || j == 0)
+                dp[i][j] = 1;
+            else
+                dp[i][j] = min3(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1;
+
+            if (dp[i][j] > max)
+            {
+                max = dp[i][j];
+                mr = i;
+                mc = j;
+            }
+        }
+    }
+
+    for (int i = mr; i > mr - max; i--)
+        for (int j = mc; j > mc - max; j--)
+            map[i][j] = full;
+
+    for (int i = 0; i < rows; i++)
+    {
+        write(1, map[i], cols);
+        write(1, "\n", 1);
+    }
+
+    for (int i = 0; i < rows; i++)
+        free(dp[i]);
+    free(dp);
+}
+
+/* ************************************************************************** */
+/*                                    MAIN                                    */
+/* ************************************************************************** */
 
 int main(int argc, char **argv)
 {
-	FILE *file;
+    int arg = 1;
+    int printed = 0;
 
-	if (argc < 2)
-		file = stdin;
-	else
-		file = fopen(argv[1], "r");
+    if (argc == 1) // STDIN
+    {
+        char *buffer;
+        if (!read_stdin(&buffer))
+            return print_error(), 0;
 
-	if (!file)
-	{
-		fprintf(stderr, "map error\n");
-		return 1;
-	}
+        int rows, cols;
+        char e, o, f;
 
-	read_header(file);
-	read_map(file);
-	fclose(file);
+        int start = parse_header(buffer, &rows, &e, &o, &f);
+        if (start < 0)
+            return print_error(), free(buffer), 0;
 
-	find_fill_square();
+        cols = 0;
+        while (buffer[start + cols] != '\n')
+            cols++;
 
-	return 0;
+        char **map = alloc_map(rows, cols);
+
+        if (parse_map(buffer, start, map, rows, cols, e, o) < 0)
+        {
+            print_error();
+            free_map(map, rows);
+            free(buffer);
+            return 0;
+        }
+
+        solve_bsq(map, rows, cols, f, o);
+
+        free_map(map, rows);
+        free(buffer);
+        return 0;
+    }
+
+    while (arg < argc)
+    {
+        char *buffer;
+        if (!read_file(argv[arg], &buffer))
+        {
+            print_error();
+            arg++;
+            continue;
+        }
+
+        int rows, cols;
+        char e, o, f;
+
+        int start = parse_header(buffer, &rows, &e, &o, &f);
+        if (start < 0)
+        {
+            print_error();
+            free(buffer);
+            arg++;
+            continue;
+        }
+
+        cols = 0;
+        while (buffer[start + cols] != '\n')
+            cols++;
+
+        char **map = alloc_map(rows, cols);
+
+        if (parse_map(buffer, start, map, rows, cols, e, o) < 0)
+        {
+            print_error();
+            free_map(map, rows);
+            free(buffer);
+            arg++;
+            continue;
+        }
+
+        if (printed)
+            write(1, "\n", 1);
+        printed = 1;
+
+        solve_bsq(map, rows, cols, f, o);
+
+        free_map(map, rows);
+        free(buffer);
+        arg++;
+    }
+
+    return 0;
 }

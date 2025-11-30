@@ -1,4 +1,7 @@
-#include "life.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 char **g_matriz;
 char **g_temp;
@@ -104,13 +107,20 @@ void draw_matrix(char *s, int h, int w)
 		else if (*s == 'd' && col < w - 1)
 			col++;
 		else if (*s == 'x') 
+		{
 			draw = !draw;
+			if (draw)
+				g_matriz[line][col] = '0'; // desenha imediatamente
+		}
+
+		// desenha após qualquer comando se draw ativo
 		if (draw)
 			g_matriz[line][col] = '0';
 
 		s++;
 	}
 }
+
 
 void print_matrix(int linha, int coluna)
 {
