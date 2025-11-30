@@ -3,20 +3,23 @@
 #include <stdlib.h>
 
 /* ************************************************************************** */
-/*                            Funções utilitárias                              */
+/*                               Variáveis globais                             */
+/* ************************************************************************** */
+
+char **g_map;
+int   g_rows;
+int   g_cols;
+char  g_empty;
+char  g_obstacle;
+char  g_full;
+
+/* ************************************************************************** */
+/*                                  Utilidades                                 */
 /* ************************************************************************** */
 
 void print_error()
 {
     write(2, "map error\n", 10);
-}
-
-int ft_strlen(char *s)
-{
-    int i = 0;
-    while (s[i])
-        i++;
-    return i;
 }
 
 int min3(int a, int b, int c)
@@ -28,7 +31,7 @@ int min3(int a, int b, int c)
 }
 
 /* ************************************************************************** */
-/*                          Alocação e liberação                               */
+/*                          Alocação e liberação                                */
 /* ************************************************************************** */
 
 char **alloc_map(int rows, int cols)
@@ -47,15 +50,15 @@ char **alloc_map(int rows, int cols)
     return m;
 }
 
-void free_map(char **map, int rows)
+void free_map()
 {
-    for (int i = 0; i < rows; i++)
-        free(map[i]);
-    free(map);
+    for (int i = 0; i < g_rows; i++)
+        free(g_map[i]);
+    free(g_map);
 }
 
 /* ************************************************************************** */
-/*                             Leitura de arquivo                              */
+/*                              Leitura de arquivo                              */
 /* ************************************************************************** */
 
 int read_file(char *path, char **buffer)
@@ -89,17 +92,16 @@ int read_stdin(char **buffer)
         free(buf);
         return 0;
     }
-
     buf[r] = '\0';
     *buffer = buf;
     return r;
 }
 
 /* ************************************************************************** */
-/*                               Parsing do mapa                               */
+/*                               Parsing                                         */
 /* ************************************************************************** */
 
-int parse_header(char *buf, int *rows, char *empty, char *obst, char *full)
+int parse_header(char *buf)
 {
     int i = 0;
     int num = 0;
@@ -113,31 +115,29 @@ int parse_header(char *buf, int *rows, char *empty, char *obst, char *full)
     if (num <= 0)
         return -1;
 
-    *rows = num;
-    *empty = buf[i++];
-    *obst  = buf[i++];
-    *full  = buf[i++];
+    g_rows = num;
+    g_empty = buf[i++];
+    g_obstacle = buf[i++];
+    g_full = buf[i++];
 
     if (buf[i] != '\n')
         return -1;
 
-    return i + 1; // retorna posição após header
+    return i + 1; // próxima posição após header
 }
 
-int parse_map(char *buf, int start, char **map,
-              int rows, int cols, char empty, char obst)
+int parse_map(char *buf, int start)
 {
     int i = start;
     int r = 0;
 
-    while (r < rows)
+    while (r < g_rows)
     {
-        for (int c = 0; c < cols; c++)
+        for (int c = 0; c < g_cols; c++)
         {
-            if (buf[i] != empty && buf[i] != obst)
+            if (buf[i] != g_empty && buf[i] != g_obstacle)
                 return -1;
-
-            map[r][c] = buf[i];
+            g_map[r][c] = buf[i];
             i++;
         }
         if (buf[i] != '\n')
@@ -149,23 +149,22 @@ int parse_map(char *buf, int start, char **map,
 }
 
 /* ************************************************************************** */
-/*                               Algoritmo BSQ                                 */
+/*                               Algoritmo BSQ                                  */
 /* ************************************************************************** */
 
-void solve_bsq(char **map, int rows, int cols,
-               char full, char obst)
+void solve_bsq()
 {
-    int **dp = malloc(sizeof(int*) * rows);
-    for (int i = 0; i < rows; i++)
-        dp[i] = calloc(cols, sizeof(int));
+    int **dp = malloc(sizeof(int*) * g_rows);
+    for (int i = 0; i < g_rows; i++)
+        dp[i] = calloc(g_cols, sizeof(int));
 
     int max = 0, mr = 0, mc = 0;
 
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < g_rows; i++)
     {
-        for (int j = 0; j < cols; j++)
+        for (int j = 0; j < g_cols; j++)
         {
-            if (map[i][j] == obst)
+            if (g_map[i][j] == g_obstacle)
                 dp[i][j] = 0;
             else if (i == 0 || j == 0)
                 dp[i][j] = 1;
@@ -183,96 +182,68 @@ void solve_bsq(char **map, int rows, int cols,
 
     for (int i = mr; i > mr - max; i--)
         for (int j = mc; j > mc - max; j--)
-            map[i][j] = full;
+            g_map[i][j] = g_full;
 
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < g_rows; i++)
     {
-        write(1, map[i], cols);
+        write(1, g_map[i], g_cols);
         write(1, "\n", 1);
     }
 
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < g_rows; i++)
         free(dp[i]);
     free(dp);
 }
 
 /* ************************************************************************** */
-/*                                    MAIN                                    */
+/*                                    MAIN                                      */
 /* ************************************************************************** */
+
+int process_buffer(char *buffer)
+{
+    int start = parse_header(buffer);
+    if (start < 0)
+        return print_error(), 0;
+
+    g_cols = 0;
+    while (buffer[start + g_cols] != '\n')
+        g_cols++;
+
+    g_map = alloc_map(g_rows, g_cols);
+
+    if (parse_map(buffer, start) < 0)
+    {
+        print_error();
+        free_map();
+        return 0;
+    }
+
+    solve_bsq();
+    free_map();
+    return 1;
+}
 
 int main(int argc, char **argv)
 {
-    int arg = 1;
-    int printed = 0;
-
-    if (argc == 1) // STDIN
+    if (argc == 1)
     {
         char *buffer;
         if (!read_stdin(&buffer))
             return print_error(), 0;
 
-        int rows, cols;
-        char e, o, f;
-
-        int start = parse_header(buffer, &rows, &e, &o, &f);
-        if (start < 0)
-            return print_error(), free(buffer), 0;
-
-        cols = 0;
-        while (buffer[start + cols] != '\n')
-            cols++;
-
-        char **map = alloc_map(rows, cols);
-
-        if (parse_map(buffer, start, map, rows, cols, e, o) < 0)
-        {
-            print_error();
-            free_map(map, rows);
-            free(buffer);
-            return 0;
-        }
-
-        solve_bsq(map, rows, cols, f, o);
-
-        free_map(map, rows);
+        process_buffer(buffer);
         free(buffer);
         return 0;
     }
 
-    while (arg < argc)
+    int printed = 0;
+
+    for (int i = 1; i < argc; i++)
     {
         char *buffer;
-        if (!read_file(argv[arg], &buffer))
+        if (!read_file(argv[i], &buffer))
         {
             print_error();
-            arg++;
-            continue;
-        }
-
-        int rows, cols;
-        char e, o, f;
-
-        int start = parse_header(buffer, &rows, &e, &o, &f);
-        if (start < 0)
-        {
-            print_error();
-            free(buffer);
-            arg++;
-            continue;
-        }
-
-        cols = 0;
-        while (buffer[start + cols] != '\n')
-            cols++;
-
-        char **map = alloc_map(rows, cols);
-
-        if (parse_map(buffer, start, map, rows, cols, e, o) < 0)
-        {
-            print_error();
-            free_map(map, rows);
-            free(buffer);
-            arg++;
             continue;
         }
 
@@ -280,11 +251,8 @@ int main(int argc, char **argv)
             write(1, "\n", 1);
         printed = 1;
 
-        solve_bsq(map, rows, cols, f, o);
-
-        free_map(map, rows);
+        process_buffer(buffer);
         free(buffer);
-        arg++;
     }
 
     return 0;
