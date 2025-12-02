@@ -113,7 +113,7 @@ void find_bsq()
 	print_map( maxsize, maxlinha, maxcol);
 }
 
-void print_map(int maxsize, int maxlinha, int maxcoluna)
+/*void print_map(int maxsize, int maxlinha, int maxcoluna)
 {
 	for (int i = maxlinha; i > (maxlinha - maxsize)+1; i--)
 	{
@@ -125,7 +125,26 @@ void print_map(int maxsize, int maxlinha, int maxcoluna)
 	}
 	for (int i = 0; i < linha; i++)
 		fprintf(stdout, "%s", mapa[i]);
+}*/
+
+void print_map(int maxsize, int maxlinha, int maxcoluna)
+{
+	/* imprime apenas a região delimitada */
+	for (int i = maxlinha - maxsize; i < maxlinha; i++)
+	{
+		for (int j = maxcoluna - maxsize; j < maxcoluna; j++)
+		{
+			if (i >= 0 && i < linha && j >= 0 && j < coluna)
+				fprintf(stdout, "%c", mapa[i][j]);
+		}
+		fprintf(stdout, "\n");
+	}
+
+	/* agora imprime o mapa inteiro */
+	for (int i = 0; i < linha; i++)
+		fprintf(stdout, "%s\n", mapa[i]);
 }
+
 
 void bsq_file(char* filename)
 {
