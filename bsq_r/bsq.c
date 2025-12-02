@@ -14,15 +14,15 @@ int is_printable(char c)
 int ft_strlen(char* str)
 {
 	int i =0;
-	while(str[i] != '\0'|| str[i] != '\0')
+	while(str[i] != '\0')
 		i++;
 	return(i);
 }
 int min3(int a, int b, int c)
 {
 	int m = a;
-	if (b < m) b = m;
-	if (c < m) c = m;
+	if (b < m) m = b;
+	if (c < m) m = c;
 
 	return (m);
 }
@@ -42,17 +42,19 @@ void read_map(FILE* file)
 {
 	int read_char;
 	size_t len = 0;
+	int check;
 	mapa = calloc(linha + 1, sizeof(char*));
 	for (int i = 0; i < linha; i++)
 	{
-		if(getline(&mapa[i],&len, file) == -1); 
+		check = getline(&mapa[i],&len, file);
+		if(check == -1)
 		{
 			fprintf(stderr, "map error2\n");
 			free_map();
 			exit(1);
 		}
-		if(mapa[i][len] == '\n')
-			mapa[i][len] = '\0';
+		if(mapa[i][check -1] == '\n')
+			mapa[i][check -1] = '\0';
 	}
 	coluna = ft_strlen(mapa[0]);
 	for (int i = 0; i < linha; i++)
@@ -115,10 +117,10 @@ void print_map(int maxsize, int maxlinha, int maxcoluna)
 {
 	for (int i = maxlinha; i > (maxlinha - maxsize)+1; i--)
 	{
-		for (int j = maxcoluna; j > (maxlinha - maxsize)+1; j--)
+		for (int j = maxcoluna; j > (maxcoluna - maxsize)+1; j--)
 		{
 			if (i < linha && j < coluna)
-			mapa[i][j];
+				mapa[i][j] = full;
 		}
 	}
 	for (int i = 0; i < linha; i++)
