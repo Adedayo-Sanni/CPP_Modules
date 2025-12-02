@@ -6,6 +6,7 @@ char obstacle;
 char full;
 int linha;
 int coluna;
+int g_error = 0; // 0 = ok, 1 = houve erro em alguma etapa
 
 int is_printable(char c)
 {
@@ -26,19 +27,42 @@ int min3(int a, int b, int c)
 
 	return (m);
 }
+//original
+// void read_header(FILE* file)
+// {
+// 		fscanf(file, "%d %c %c %c\n", &linha, &empty, &obstacle, &full);
+// 	if (!is_printable(empty)||!is_printable(obstacle)||!is_printable(full)||
+//     empty == obstacle || empty == full || obstacle == full)
+// {
+//     fprintf(stderr, "map error1\n");
+//     return;
+// }
+
+// }
+
 
 void read_header(FILE* file)
 {
-		fscanf(file, "%d %c %c %c\n", &linha, &empty, &obstacle, &full);
-	if (!is_printable(empty)||!is_printable(obstacle)||!is_printable(full)||
-    empty == obstacle || empty == full || obstacle == full)
-{
-    fprintf(stderr, "map error1\n");
-    return;
-}
+    g_error = 0; // sempre zeramos o erro antes de ler um novo header
 
-}
+    // Se não ler exatamente 4 itens, o header já está errado
+    if (fscanf(file, "%d %c %c %c\n", &linha, &empty, &obstacle, &full) != 4)
+    {
+        fprintf(stderr, "map error1\n");
+        g_error = 1;
+        return;
+    }
 
+    // valida caracteres
+    if (!is_printable(empty) || !is_printable(obstacle) || !is_printable(full) ||
+        empty == obstacle || empty == full || obstacle == full || linha <= 0)
+    {
+        fprintf(stderr, "map error1\n");
+        g_error = 1;
+        return;
+    }
+}
+//
 // void read_map(FILE* file)
 // {
 // 	int read_char;
@@ -77,46 +101,126 @@ void read_header(FILE* file)
 // 		}
 // }
 
+
+
+//original
+// void read_map(FILE* file)
+// {
+//     int check;
+//     mapa = calloc(linha + 1, sizeof(char*));
+//     for (int i = 0; i < linha; i++)
+//     {
+//         size_t len = 0;
+//         check = getline(&mapa[i], &len, file);
+//         if (check == -1)
+//         {
+//             fprintf(stderr, "map error2\n");
+//             return;
+//         }
+//         if (mapa[i][check -1] == '\n')
+//             mapa[i][check -1] = '\0';
+//     }
+//     coluna = ft_strlen(mapa[0]);
+
+//     for (int i = 0; i < linha; i++)
+//         for (int j = 0; j < coluna; j++)
+//             if (mapa[i][j] != obstacle && mapa[i][j] != empty)
+//             {
+//                 fprintf(stderr, "map error3\n");
+//                 return;
+//             }
+
+//     for (int i = 0; i < linha; i++)
+//         if (ft_strlen(mapa[i]) != coluna)
+//         {
+//             fprintf(stderr, "map error4\n");
+//             return;
+//         }
+// }
+
 void read_map(FILE* file)
 {
     int check;
+
+    if (g_error) // se o header já falhou, nem tenta ler mapa
+        return;
+
     mapa = calloc(linha + 1, sizeof(char*));
+    if (!mapa)
+    {
+        fprintf(stderr, "map error2\n");
+        g_error = 1;
+        return;
+    }
+
     for (int i = 0; i < linha; i++)
     {
         size_t len = 0;
+        mapa[i] = NULL; // importante: getline vai alocar
+
         check = getline(&mapa[i], &len, file);
         if (check == -1)
         {
             fprintf(stderr, "map error2\n");
+            g_error = 1;
             return;
         }
-        if (mapa[i][check -1] == '\n')
-            mapa[i][check -1] = '\0';
+        if (check > 0 && mapa[i][check - 1] == '\n')
+            mapa[i][check - 1] = '\0';
     }
+
+    // se a primeira linha for vazia ou NULL, já é erro de formato
+    if (!mapa[0] || mapa[0][0] == '\0')
+    {
+        fprintf(stderr, "map error4\n");
+        g_error = 1;
+        return;
+    }
+
     coluna = ft_strlen(mapa[0]);
 
+    // 1º: garante que TODAS as linhas têm o MESMO tamanho
     for (int i = 0; i < linha; i++)
-        for (int j = 0; j < coluna; j++)
-            if (mapa[i][j] != obstacle && mapa[i][j] != empty)
-            {
-                fprintf(stderr, "map error3\n");
-                return;
-            }
-
-    for (int i = 0; i < linha; i++)
+    {
         if (ft_strlen(mapa[i]) != coluna)
         {
             fprintf(stderr, "map error4\n");
+            g_error = 1;
             return;
         }
-}
+    }
 
+    // 2º: valida caracteres (só empty ou obstacle)
+    for (int i = 0; i < linha; i++)
+    {
+        for (int j = 0; j < coluna; j++)
+        {
+            if (mapa[i][j] != obstacle && mapa[i][j] != empty)
+            {
+                fprintf(stderr, "map error3\n");
+                g_error = 1;
+                return;
+            }
+        }
+    }
+}
+//original
+// void free_map(void)
+// {
+// 	for (int i = 0; i < linha; i++)
+// 		free(mapa[i]);
+// 	free(mapa);
+// }
 
 void free_map(void)
 {
-	for (int i = 0; i < linha; i++)
-		free(mapa[i]);
-	free(mapa);
+    if (!mapa) // se nunca alocou, não faz nada
+        return;
+
+    for (int i = 0; i < linha; i++)
+        free(mapa[i]);
+    free(mapa);
+    mapa = NULL;
 }
 
 void find_bsq()
@@ -170,28 +274,61 @@ void print_map(int maxsize, int maxlinha, int maxcoluna)
 		fprintf(stdout, "%s\n", mapa[i]);
 }
 
+//original
+// void bsq_file(char* filename)
+// {
+// 	FILE* file = fopen(filename, "r");
+// 	if(!file)
+// 	{
+// 		fprintf(stderr, "map error5\n");
+// 		exit (1);
+// 	}
+// 	read_header(file);
+// 	read_map(file);
+// 	find_bsq();
+// 	//free_map();
+// 	fclose(file);
+// }
 
 void bsq_file(char* filename)
 {
-	FILE* file = fopen(filename, "r");
-	if(!file)
-	{
-		fprintf(stderr, "map error5\n");
-		exit (1);
-	}
-	read_header(file);
-	read_map(file);
-	find_bsq();
-	//free_map();
-	fclose(file);
+    FILE* file = fopen(filename, "r");
+    if(!file)
+    {
+        fprintf(stderr, "map error5\n");
+        return; // não precisa dar exit, só não processa esse arquivo
+    }
+
+    mapa = NULL; // garante estado conhecido
+
+    read_header(file);
+    read_map(file);
+
+    if (!g_error)
+        find_bsq();   // só roda o algoritmo se tudo deu certo
+
+    free_map();
+    fclose(file);
 }
+//original
+// void bsq_stdin()
+// {
+// 	read_header(stdin);
+// 	read_map(stdin);
+// 	find_bsq();
+// 	//free_map();
+// }
 
 void bsq_stdin()
 {
-	read_header(stdin);
-	read_map(stdin);
-	find_bsq();
-	//free_map();
+    mapa = NULL;
+    read_header(stdin);
+    read_map(stdin);
+
+    if (!g_error)
+        find_bsq();
+
+    free_map();
 }
 
 int main(int argc, char**argv)
