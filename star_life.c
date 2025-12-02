@@ -110,17 +110,14 @@ void draw_matrix(char *s, int h, int w)
 		{
 			draw = !draw;
 			if (draw)
-				g_matriz[line][col] = '0'; // desenha imediatamente
+				g_matriz[line][col] = '0';
 		}
-
-		// desenha após qualquer comando se draw ativo
 		if (draw)
 			g_matriz[line][col] = '0';
 
 		s++;
 	}
 }
-
 
 void print_matrix(int linha, int coluna)
 {
@@ -175,11 +172,15 @@ void start_game(int linha, int coluna, int it)
 				{
 					if (n == 2 || n == 3)
 						g_temp[i][j] = '0';
+					else 
+						g_temp[i][j] = 'x';
 				}
 				else
 				{
 					if (n == 3)
 						g_temp[i][j] = '0';
+					else 
+						g_temp[i][j] = 'x';
 				}
 			}
 		}
