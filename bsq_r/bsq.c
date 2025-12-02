@@ -30,51 +30,87 @@ int min3(int a, int b, int c)
 void read_header(FILE* file)
 {
 		fscanf(file, "%d %c %c %c\n", &linha, &empty, &obstacle, &full);
-		if (!is_printable(empty)||!is_printable(obstacle)||!is_printable(full)||
-		empty == obstacle || empty == full || obstacle == full)
-    {
-        fprintf(stderr, "map error1\n");
-        exit(1);
-    }
+	if (!is_printable(empty)||!is_printable(obstacle)||!is_printable(full)||
+    empty == obstacle || empty == full || obstacle == full)
+{
+    fprintf(stderr, "map error1\n");
+    return;
 }
+
+}
+
+// void read_map(FILE* file)
+// {
+// 	int read_char;
+// 	int check;
+// 	mapa = calloc(linha + 1, sizeof(char*));
+// 	for (int i = 0; i < linha; i++)
+// 	{
+// 		size_t len = 0;
+// 		check = getline(&mapa[i],&len, file);
+// 		if(check == -1)
+// 		{
+// 			fprintf(stderr, "map error2\n");
+// 			//free_map();
+// 			return;
+// 		}
+// 		if(mapa[i][check -1] == '\n')
+// 			mapa[i][check -1] = '\0';
+// 	}
+// 	coluna = ft_strlen(mapa[0]);
+// 	for (int i = 0; i < linha; i++)
+// 	{
+// 			for(int j = 0;j < coluna; j++ )
+// 				if (mapa[i][j] != obstacle && mapa[i][j]!= empty)
+// 				{
+// 					fprintf(stderr, "map error3\n");
+// 					//free_map();
+// 					return;
+// 	;
+// 				}
+// 	}
+// 	for (int i = 0; i < linha; i++)
+// 		if (ft_strlen(mapa[i]) != coluna)
+// 		{
+// 			fprintf(stderr, "map error4\n");
+// 			//free_map();;
+// 		}
+// }
 
 void read_map(FILE* file)
 {
-	int read_char;
-	size_t len = 0;
-	int check;
-	mapa = calloc(linha + 1, sizeof(char*));
-	for (int i = 0; i < linha; i++)
-	{
-		check = getline(&mapa[i],&len, file);
-		if(check == -1)
-		{
-			fprintf(stderr, "map error2\n");
-			free_map();
-			exit(1);
-		}
-		if(mapa[i][check -1] == '\n')
-			mapa[i][check -1] = '\0';
-	}
-	coluna = ft_strlen(mapa[0]);
-	for (int i = 0; i < linha; i++)
-	{
-			for(int j = 0;j < coluna; j++ )
-				if (mapa[i][j] != obstacle && mapa[i][j]!= empty)
-				{
-					fprintf(stderr, "map error3\n");
-					free_map();
-					exit(1);
-				}
-	}
-	for (int i = 0; i < linha; i++)
-		if (ft_strlen(mapa[i]) != coluna)
-		{
-			fprintf(stderr, "map error4\n");
-			free_map();
-			exit(1);
-		}
+    int check;
+    mapa = calloc(linha + 1, sizeof(char*));
+    for (int i = 0; i < linha; i++)
+    {
+        size_t len = 0;
+        check = getline(&mapa[i], &len, file);
+        if (check == -1)
+        {
+            fprintf(stderr, "map error2\n");
+            return;
+        }
+        if (mapa[i][check -1] == '\n')
+            mapa[i][check -1] = '\0';
+    }
+    coluna = ft_strlen(mapa[0]);
+
+    for (int i = 0; i < linha; i++)
+        for (int j = 0; j < coluna; j++)
+            if (mapa[i][j] != obstacle && mapa[i][j] != empty)
+            {
+                fprintf(stderr, "map error3\n");
+                return;
+            }
+
+    for (int i = 0; i < linha; i++)
+        if (ft_strlen(mapa[i]) != coluna)
+        {
+            fprintf(stderr, "map error4\n");
+            return;
+        }
 }
+
 
 void free_map(void)
 {
@@ -121,18 +157,19 @@ void find_bsq()
 void print_map(int maxsize, int maxlinha, int maxcoluna)
 {
 	/* Preenche o bsq */
-	for (int i = maxlinha - maxsize; i < maxlinha; i++)
+	for (int i = maxlinha - (maxsize -1); i < maxlinha + 1; i++)
 	{
-		for (int j = maxcoluna - maxsize; j < maxcoluna; j++)
+		for (int j = maxcoluna - (maxsize -1); j < maxcoluna + 1; j++)
 		{
 			if (i >= 0 && i < linha && j >= 0 && j < coluna)
-				mapa[i][j] = 'x';;
+				mapa[i][j] = full;
 		}
 	}
 	/* imprime o mapa inteiro */
 	for (int i = 0; i < linha; i++)
 		fprintf(stdout, "%s\n", mapa[i]);
 }
+
 
 void bsq_file(char* filename)
 {
@@ -145,6 +182,7 @@ void bsq_file(char* filename)
 	read_header(file);
 	read_map(file);
 	find_bsq();
+	//free_map();
 	fclose(file);
 }
 
@@ -153,6 +191,7 @@ void bsq_stdin()
 	read_header(stdin);
 	read_map(stdin);
 	find_bsq();
+	//free_map();
 }
 
 int main(int argc, char**argv)
