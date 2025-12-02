@@ -11,6 +11,13 @@ int is_printable(char c)
 {
 	return (c >= 32 && c <= 126);
 }
+int ft_strlen(char* str)
+{
+	int i =0;
+	while(str[i] != '\0'|| str[i] != '\0')
+		i++;
+	return(i);
+}
 int min3(int a, int b, int c)
 {
 	int m = a;
@@ -20,48 +27,48 @@ int min3(int a, int b, int c)
 	return (m);
 }
 
-void read_header(FILE *file)
+void read_header(FILE* file)
 {
 		fscanf(file, "%d %c %c %c\n", &linha, &empty, &obstacle, &full);
 		if (!is_printable(empty)||!is_printable(obstacle)||!is_printable(full)||
 		empty == obstacle || empty == full || obstacle == full)
     {
-        fprintf(stderr, "map error\n");
+        fprintf(stderr, "map error1\n");
         exit(1);
     }
 }
 
-void read_map(FILE *file)
+void read_map(FILE* file)
 {
 	int read_char;
-	int len = 0;
+	size_t len = 0;
 	mapa = calloc(linha + 1, sizeof(char*));
 	for (int i = 0; i < linha; i++)
 	{
 		if(getline(&mapa[i],&len, file) == -1); 
 		{
-			fprintf(stderr, "map error\n");
+			fprintf(stderr, "map error2\n");
 			free_map();
 			exit(1);
 		}
 		if(mapa[i][len] == '\n')
 			mapa[i][len] = '\0';
 	}
-	coluna = strlen(mapa[0]);
+	coluna = ft_strlen(mapa[0]);
 	for (int i = 0; i < linha; i++)
 	{
 			for(int j = 0;j < coluna; j++ )
 				if (mapa[i][j] != obstacle && mapa[i][j]!= empty)
 				{
-					fprintf(stderr, "map error\n");
+					fprintf(stderr, "map error3\n");
 					free_map();
 					exit(1);
 				}
 	}
 	for (int i = 0; i < linha; i++)
-		if (strlen(mapa[i]) != coluna)
+		if (ft_strlen(mapa[i]) != coluna)
 		{
-			fprintf(stderr, "map error\n");
+			fprintf(stderr, "map error4\n");
 			free_map();
 			exit(1);
 		}
@@ -115,17 +122,15 @@ void print_map(int maxsize, int maxlinha, int maxcoluna)
 		}
 	}
 	for (int i = 0; i < linha; i++)
-		fprintf("%s", mapa[i]);
+		fprintf(stdout, "%s", mapa[i]);
 }
 
-
-
-void bsq_file(FILE *file)
+void bsq_file(char* filename)
 {
-	FILE* file = fopen(file, "r");
+	FILE* file = fopen(filename, "r");
 	if(!file)
 	{
-		fprintf(stderr, "map error\n");
+		fprintf(stderr, "map error5\n");
 		exit (1);
 	}
 	read_header(file);
