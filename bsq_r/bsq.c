@@ -85,66 +85,54 @@ void free_map(void)
 
 void find_bsq()
 {
-	int maxsize = 0;
-	int maxcol = 0;
-	int maxlinha = 0; 
+	int **dp = malloc(sizeof(int*) * linha);
+    for (int i = 0; i < linha; i++)
+        dp[i] = calloc(coluna, sizeof(int));
 
-	for(int i = 0; i < linha; i++)
-	{
-		for(int j = 0; j < coluna; j++)
-		{
-			if(mapa[i][j] == obstacle)
-				mapa[i][j] = 0;
-			else if(i == 0 || j == 0)
-				mapa[i][j] = 1;
-			else 
-			{
-				int min = min3(mapa[i - 1][j],mapa[i - 1][j - 1], mapa[i][j - 1]);
-				mapa[i][j] = min + 1;
-			}
-			if(mapa[i][j] > maxsize)
-			{
-				maxsize = mapa[i][j];
-				maxlinha = i - mapa[i][j] + 1;
-				maxcol = j - mapa[i][j] + 1;
-			}
-		}
-	}
-	print_map( maxsize, maxlinha, maxcol);
+    int max = 0, mr = 0, mc = 0;
+
+    for (int i = 0; i < linha; i++)
+    {
+        for (int j = 0; j < coluna; j++)
+        {
+            if (mapa[i][j] == obstacle)
+                dp[i][j] = 0;
+            else if (i == 0 || j == 0)
+                dp[i][j] = 1;
+            else
+                dp[i][j] = min3(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1;
+
+            if (dp[i][j] > max)
+            {
+                max = dp[i][j];
+                mr = i;
+                mc = j;
+            }
+        }
+    }
+
+    print_map(max, mr, mc);
+
+    for (int i = 0; i < linha; i++)
+        free(dp[i]);
+    free(dp);
 }
-
-/*void print_map(int maxsize, int maxlinha, int maxcoluna)
-{
-	for (int i = maxlinha; i > (maxlinha - maxsize)+1; i--)
-	{
-		for (int j = maxcoluna; j > (maxcoluna - maxsize)+1; j--)
-		{
-			if (i < linha && j < coluna)
-				mapa[i][j] = full;
-		}
-	}
-	for (int i = 0; i < linha; i++)
-		fprintf(stdout, "%s", mapa[i]);
-}*/
 
 void print_map(int maxsize, int maxlinha, int maxcoluna)
 {
-	/* imprime apenas a região delimitada */
+	/* Preenche o bsq */
 	for (int i = maxlinha - maxsize; i < maxlinha; i++)
 	{
 		for (int j = maxcoluna - maxsize; j < maxcoluna; j++)
 		{
 			if (i >= 0 && i < linha && j >= 0 && j < coluna)
-				fprintf(stdout, "%c", mapa[i][j]);
+				mapa[i][j] = 'x';;
 		}
-		fprintf(stdout, "\n");
 	}
-
-	/* agora imprime o mapa inteiro */
+	/* imprime o mapa inteiro */
 	for (int i = 0; i < linha; i++)
 		fprintf(stdout, "%s\n", mapa[i]);
 }
-
 
 void bsq_file(char* filename)
 {
